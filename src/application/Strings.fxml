@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<resources>
+
+
+<string name ="Sample.fxml">SimpleListView</string>
+
+<array name = "Financial_Instruments">
+
+
+	<item>SPY</item>
+	<item>QQQ</item>
+	<item>Rus2000</item>
+	
+	
+</array>
+</resources>
+
