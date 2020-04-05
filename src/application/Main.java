@@ -15,41 +15,23 @@ import javafx.fxml.FXMLLoader;
 public class Main extends Application {
 
 
-	@Override
-	public void start(Stage primaryStage) {
-
-		try {
-
-			FXMLLoader loader = FXMLLoader.load(getClass().getResource("/application/Sample.fxml"));
-
-			primaryStage.setTitle("Stock Market Data");
-			
-			SampleController sc = new SampleController();
-			
-			loader.setController(sc);
-			
-			FlowPane fp = loader.load();
-			
-			Scene scene = new Scene(fp,600,700);
-			
-			primaryStage.setScene(scene);
-			primaryStage.show();
-
-
+		@Override
+		
+		public void start(Stage primaryStage) {
+			try {
+				Parent root = FXMLLoader.load(getClass().getResource("/application/Sample.fxml"));
+				Scene scene = new Scene(root);
+				scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+				primaryStage.setScene(scene);
+				primaryStage.show();
+				
+				
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
+		
 		}
-
-		catch (Exception e) {
-
+		public static void main(String[] args) {
+			launch(args);
 		}
-
-
-
-
 	}
-
-	public static void main(String[] args) {
-		launch(args);
-	}
-
-
-}

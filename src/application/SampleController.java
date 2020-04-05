@@ -1,50 +1,59 @@
 package application;
 
-import java.awt.Label;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.control.Alert;
+import javafx.scene.chart.LineChart;
 import javafx.scene.control.ListView;
-import javafx.scene.control.Alert.AlertType;
-import javafx.stage.Popup;
-import javafx.stage.Stage;
+import javafx.scene.control.MenuBar;
 
 public class SampleController implements Initializable{
 
-	@FXML 
-	private ListView<String>mainListView;
+    @FXML
+    private MenuBar mainMenuBar;
 
+    @FXML
+    private ListView<String> mainListView;
 
-
-	
-
+    @FXML
+    private LineChart<?, ?> mainGraphView;
+    
+    
 
 	/**
 	 * Initializing the class
 	 */
-	@Override
+    @Override
 	public void initialize(URL url, ResourceBundle rb) {
-		
-		ObservableList<String>thisMainListView = FXCollections.observableArrayList("SPY","QQQ","Rus2000");
-
-		mainListView.setItems(thisMainListView);
-
+    
+    	mainListView.getItems().addAll(mainListViewGetter());
+    	
+	
 	}
+    
+    
+    public ObservableList<String> mainListViewGetter(){
+    	ObservableList<String>financialInstruments = FXCollections.observableArrayList();
+    	financialInstruments.add("SPY");
+    	financialInstruments.add("QQQ");
+    	financialInstruments.add("Rus2000");
+    	return financialInstruments;
+    }
 
-
-
-
-
-
-
+    
 
 }
+
+
+
+
+
+
+
+
+
+
