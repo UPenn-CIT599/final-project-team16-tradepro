@@ -20,7 +20,7 @@ public class SampleController implements Initializable{
     private ListView<String> mainListView;
 
     @FXML
-    private LineChart<?, ?> mainGraphView;
+    private LineChart<String, Integer> mainGraphView;
     
     
 
