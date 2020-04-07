@@ -14,9 +14,11 @@ import javafx.fxml.FXMLLoader;
 
 public class Main extends Application {
 
-
+	
+		/**
+		 * Sets the default view for the Gui, and the title of the gui
+		 */
 		@Override
-		
 		public void start(Stage primaryStage) {
 			try {
 				Parent root = FXMLLoader.load(getClass().getResource("/application/Sample.fxml"));
@@ -33,6 +35,12 @@ public class Main extends Application {
 			}
 		
 		}
+		
+		
+		/**
+		 * launches the gui
+		 * @param args
+		 */
 		public static void main(String[] args) {
 			launch(args);
 		}
