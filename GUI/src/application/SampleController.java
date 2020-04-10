@@ -12,6 +12,7 @@ import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuBar;
+import javafx.scene.control.TextField;
 
 public class SampleController implements Initializable{
 
@@ -23,12 +24,24 @@ public class SampleController implements Initializable{
 
     @FXML
     private LineChart<String, Integer> mainGraphView;
-    
+
     @FXML
     private CategoryAxis x;
 
     @FXML
     private NumberAxis y;
+
+    @FXML
+    private TextField textBox1;
+
+    @FXML
+    private TextField textBox2;
+
+    @FXML
+    private TextField textBox4;
+
+    @FXML
+    private TextField textBox3;
 
 	/**
 	 * Initializing the class
