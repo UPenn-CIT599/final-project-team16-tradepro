@@ -4,15 +4,15 @@
 <?import javafx.scene.chart.CategoryAxis?>
 <?import javafx.scene.chart.LineChart?>
 <?import javafx.scene.chart.NumberAxis?>
-<?import javafx.scene.control.ContextMenu?>
-<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="528.0" prefWidth="818.0" stylesheets="@application.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.SampleController">
    <top>
@@ -36,17 +36,6 @@
         </menus>
       </MenuBar>
    </top>
-   <left>
-      <ListView fx:id="mainListView" prefHeight="390.0" prefWidth="255.0" style="-fx-background-color: LemonChiffonLemonChiffon; -fx-border-color: DarkGrey;" BorderPane.alignment="CENTER">
-         <contextMenu>
-            <ContextMenu>
-              <items>
-                <MenuItem mnemonicParsing="false" text="Show" />
-              </items>
-            </ContextMenu>
-         </contextMenu>
-      </ListView>
-   </left>
    <right>
       <LineChart fx:id="mainGraphView" prefHeight="388.0" prefWidth="523.0" BorderPane.alignment="CENTER">
         <xAxis>
@@ -61,18 +50,33 @@
       <AmbientLight color="CHARTREUSE" lightOn="true" BorderPane.alignment="CENTER" />
    </center>
    <bottom>
-      <SplitPane dividerPositions="0.30637254901960786" prefHeight="109.0" prefWidth="818.0" BorderPane.alignment="CENTER">
+      <SplitPane fx:id="mainScrollPanel" dividerPositions="0.30637254901960786" prefHeight="109.0" prefWidth="818.0" BorderPane.alignment="CENTER">
         <items>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="107.0" prefWidth="459.0" />
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="107.0" prefWidth="459.0">
+               <children>
+                  <TextField fx:id="analystRecommendation" layoutX="45.0" layoutY="14.0" prefHeight="31.0" prefWidth="157.0" text="Analyst Recommendation" />
+                  <TextField fx:id="actualAnalystRecommendation" alignment="CENTER" layoutX="43.0" layoutY="54.0" prefHeight="52.0" prefWidth="161.0" text="Buy !" />
+               </children></AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="107.0" prefWidth="463.0" style="-fx-background-color: LemonChiffonLemonChiffon;">
                <children>
-                  <TextField fx:id="textBox1" blendMode="DARKEN" layoutX="14.0" layoutY="14.0" prefHeight="27.0" prefWidth="103.0" text="Metric One" />
-                  <TextField fx:id="textBox2" blendMode="DARKEN" layoutX="151.0" layoutY="14.0" prefHeight="27.0" prefWidth="103.0" text="Metric Two" />
-                  <TextField fx:id="textBox4" blendMode="DARKEN" layoutX="445.0" layoutY="14.0" prefHeight="27.0" prefWidth="103.0" text="Metric Four" />
-                  <TextField fx:id="textBox3" blendMode="DARKEN" layoutX="301.0" layoutY="14.0" prefHeight="27.0" prefWidth="103.0" text="Metric Three" />
+                  <TextField fx:id="textBox1" alignment="CENTER" blendMode="DARKEN" layoutX="14.0" layoutY="14.0" prefHeight="27.0" prefWidth="103.0" text="Metric One" />
+                  <TextField fx:id="textBox2" alignment="CENTER" blendMode="DARKEN" layoutX="151.0" layoutY="14.0" prefHeight="27.0" prefWidth="103.0" text="Metric Two" />
+                  <TextField fx:id="textBox4" alignment="CENTER" blendMode="DARKEN" layoutX="445.0" layoutY="14.0" prefHeight="27.0" prefWidth="103.0" text="Metric Four" />
+                  <TextField fx:id="textBox3" alignment="CENTER" blendMode="DARKEN" layoutX="301.0" layoutY="14.0" prefHeight="27.0" prefWidth="103.0" text="Metric Three" />
+                  <TextField fx:id="metricOneShower" alignment="CENTER" layoutX="13.0" layoutY="54.0" prefHeight="50.0" prefWidth="105.0" text="1234" />
+                  <TextField fx:id="metricTwoShower" alignment="CENTER" layoutX="150.0" layoutY="54.0" prefHeight="50.0" prefWidth="105.0" text="1234" />
+                  <TextField fx:id="metricThreeShower" alignment="CENTER" layoutX="300.0" layoutY="54.0" prefHeight="50.0" prefWidth="105.0" text="1234" />
+                  <TextField fx:id="metricFourShower" alignment="CENTER" layoutX="444.0" layoutY="54.0" prefHeight="50.0" prefWidth="105.0" text="1234" />
                </children>
             </AnchorPane>
         </items>
       </SplitPane>
    </bottom>
+   <left>
+      <ScrollPane fx:id="mainScrollPane" hbarPolicy="NEVER" prefHeight="390.0" prefWidth="263.0" vbarPolicy="ALWAYS" BorderPane.alignment="CENTER">
+         <content>
+            <VBox fx:id="mainVBox" prefHeight="387.0" prefWidth="245.0" />
+         </content>
+      </ScrollPane>
+   </left>
 </BorderPane>

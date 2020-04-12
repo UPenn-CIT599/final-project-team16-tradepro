@@ -1,3 +1,9 @@
 .root{
-	-fx-background-color: LemonChiffon;
+	-fx-background-color: DarkGrey;
+}
+
+#stockButtons{
+	
+	/* -fx-background-color: Blue; */
+	-fx-cursor: hand;
 }
