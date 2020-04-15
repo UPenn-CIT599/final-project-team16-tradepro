@@ -7,42 +7,123 @@ import java.util.Map;
  */
 public class Stock {
 	private String symbol;
-	private String name;
-	private String exchange;
-	private String currency;
-	private double price;
-	private int marketTime;
-	private double change;
-	private double changePercent;
-	private double bid;
-	private double ask;
-	private double dayHigh;
-	private double dayLow;
-	private int volumn;
-	private double previousClose;
-	private double todaysOpen;
-	private double fiftyTwoWeekLow;
-	private double fiftyTwoWeekHigh;
-	private int dividendDate;
-	private int annualDividendRate;
-	private float PE;
-	private float annualDividendYield;
-	private Map<Integer, Float> history;
+	private String currency;  //"currency":"USD"
+	private String name; //"shortName":"Microsoft Corporation"
+	private double change;  //"regularMarketChange":11.029999
+	private double changePercent;  //"regularMarketChangePercent":7.170252,
+	private int marketTime; //"regularMarketTime":1586202655
+	private double price; //"regularMarketPrice":164.86
+	private double dayHigh;  //"regularMarketDayHigh":164.99
+	private double dayLow;  //"regularMarketDayLow":157.59
+	private int volumn;  //"regularMarketVolume":47170448
+	private double previousClose;  //"regularMarketPreviousClose":153.83
+	private double bid;  //"bid":162.52,
+	private double ask;  //"ask":162.64
+	private double todaysOpen;  //"regularMarketOpen":160.32
+	private double fiftyTwoWeekLow;  //"fiftyTwoWeekLow":118.58
+	private double fiftyTwoWeekHigh;  //"fiftyTwoWeekHigh":190.7
+	private Map<Integer, Double> history; //因为数据多而且时间范围和interval可以变化，所以不要实时更新，最好是单独列一个method来获取，由用户选择range和interval，或者根据range确定interval
 	
 	/**
-	 * Constructor. Requires a the symbol of the stock as input, 
+	 * Constructor. Requires the symbol of the stock as input, 
 	 * then call method of API class to get the info of the stock,
 	 * and assign them to each instance variable.
 	 * @param symbol
 	 */
 	public Stock(String symbol) {
 		this.symbol = symbol;
-		
-		// Call getInfo() method of API class to get the quote for the stock
-		Map<String, String> quote = API.getInfo(symbol);
-		
-		// TODO convert string to appropriate type for each variable and initialize the instance
+		update();
+	}
 	
+	/**
+	 * Update info of the stock except for the history variable
+	 */
+	public void update() {
+		Map<String, String> newQuote = API.parseQuoteResponse(API.getResponse(API.constructUrl(this.symbol)));
+		
+		setCurrency(newQuote.get("currency"));
+		setName(newQuote.get("shortName"));
+		setChange(Double.parseDouble(newQuote.get("regularMarketChange")));
+		setChangePercent(Double.parseDouble(newQuote.get("regularMarketChangePercent")));
+		setMarketTime(Integer.parseInt(newQuote.get("regularMarketTime")));
+		setPrice(Double.parseDouble(newQuote.get("regularMarketPrice")));
+		setDayHigh(Double.parseDouble(newQuote.get("regularMarketDayHigh")));
+		setDayLow(Double.parseDouble(newQuote.get("regularMarketDayLow")));
+		setVolumn(Integer.parseInt(newQuote.get("regularMarketVolume")));
+		setPreviousClose(Double.parseDouble(newQuote.get("regularMarketPreviousClose")));
+		setBid(Double.parseDouble(newQuote.get("bid")));
+		setAsk(Double.parseDouble(newQuote.get("ask")));
+		setTodaysOpen(Double.parseDouble(newQuote.get("regularMarketOpen")));
+		setFiftyTwoWeekLow(Double.parseDouble(newQuote.get("fiftyTwoWeekLow")));
+		setFiftyTwoWeekHigh(Double.parseDouble(newQuote.get("fiftyTwoWeekHigh")));
+	}
+	
+	/**
+	 * Assign value to the history variable by calling API class methods, with user decided interval as argument
+	 * @param interval - String. User decided time interval
+	 */
+	public void getHistory(String interval) {
+		Map<Integer, Double> history = API.parseHistoryResponse(API.getResponse(API.constructUrl(this.symbol, interval)));
+		this.history = history;
+	}
+
+	private void setName(String name) {
+		this.name = name;
+	}
+
+	private void setCurrency(String currency) {
+		this.currency = currency;
+	}
+	private void setPrice(double price) {
+		this.price = price;
+	}
+
+	private void setMarketTime(int marketTime) {
+		this.marketTime = marketTime;
+	}
+
+	private void setChange(double change) {
+		this.change = change;
+	}
+
+	private void setChangePercent(double changePercent) {
+		this.changePercent = changePercent;
+	}
+
+	private void setBid(double bid) {
+		this.bid = bid;
+	}
+
+	private void setAsk(double ask) {
+		this.ask = ask;
+	}
+
+	private void setDayHigh(double dayHigh) {
+		this.dayHigh = dayHigh;
+	}
+
+	private void setDayLow(double dayLow) {
+		this.dayLow = dayLow;
+	}
+
+	private void setVolumn(int volumn) {
+		this.volumn = volumn;
+	}
+
+	private void setPreviousClose(double previousClose) {
+		this.previousClose = previousClose;
+	}
+
+	private void setTodaysOpen(double todaysOpen) {
+		this.todaysOpen = todaysOpen;
+	}
+
+	private void setFiftyTwoWeekLow(double fiftyTwoWeekLow) {
+		this.fiftyTwoWeekLow = fiftyTwoWeekLow;
+	}
+
+	private void setFiftyTwoWeekHigh(double fiftyTwoWeekHigh) {
+		this.fiftyTwoWeekHigh = fiftyTwoWeekHigh;
 	}
 
 	public String getSymbol() {
@@ -51,10 +132,6 @@ public class Stock {
 
 	public String getName() {
 		return name;
-	}
-
-	public String getExchange() {
-		return exchange;
 	}
 
 	public String getCurrency() {
@@ -113,26 +190,7 @@ public class Stock {
 		return fiftyTwoWeekHigh;
 	}
 
-	public int getDividendDate() {
-		return dividendDate;
-	}
-
-	public int getAnnualDividendRate() {
-		return annualDividendRate;
-	}
-
-	public float getPE() {
-		return PE;
-	}
-
-	public float getAnnualDividendYield() {
-		return annualDividendYield;
-	}
-
-	public Map<Integer, Float> getHistory() {
+	public Map<Integer, Double> getHistory() {
 		return history;
 	}
-	
-	
-	
 }
