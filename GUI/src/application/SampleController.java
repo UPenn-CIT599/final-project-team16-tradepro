@@ -69,6 +69,9 @@ public class SampleController implements Initializable{
     
     @FXML
     private TextField actualAnalystRecommendation;
+    
+    @FXML
+    private TextField analystRecommendation;
 
 	/**
 	 * Initializing the class
@@ -86,7 +89,20 @@ public class SampleController implements Initializable{
 	 * @return ObservableList
 	 */
 	public void buttonPopulator(){
+		
+		textBox1.setEditable(false);
+		textBox2.setEditable(false);
+		textBox3.setEditable(false);
+		textBox4.setEditable(false);
 
+		metricOneShower.setEditable(false);
+		metricTwoShower.setEditable(false);
+		metricThreeShower.setEditable(false);
+		metricFourShower.setEditable(false);
+		
+		actualAnalystRecommendation.setEditable(false);
+		
+		analystRecommendation.setEditable(false);
 		
 		ObservableList<Stock>stocks = GetStockList();
 		
@@ -99,7 +115,11 @@ public class SampleController implements Initializable{
 			tempButton.setId("stockButtons");
 			mainVBox.getChildren().add(tempButton);
 			
+			
+			
 			tempButton.setOnAction((ActionEvent e)->{
+				
+				
 			
 				metricOneShower.setText("" + stock.getMetricOne());
 				metricTwoShower.setText("" + stock.getMetricTwo());
@@ -140,25 +160,7 @@ public class SampleController implements Initializable{
 		financialInstruments.add(new Stock("AAPL", 1, 8, 3, 4, "Buy"));
 		financialInstruments.add(new Stock("MSFT", 1, 7, 3, 4, "Buy"));
 
-		
-		/*financialInstruments.add("SPY");
-		financialInstruments.add("QQQ");
-		financialInstruments.add("Rus2000");
-		financialInstruments.add("AAPL");
-		financialInstruments.add("MSFT");
-		financialInstruments.add("AMZN");
-		financialInstruments.add("INTC");
-		financialInstruments.add("NEW");
-		financialInstruments.add("JPM");
-		financialInstruments.add("WMT");
-		financialInstruments.add("BAC");
-		financialInstruments.add("GE");
-		financialInstruments.add("GOOG");
-		financialInstruments.add("TSLA");
-		financialInstruments.add("XOM");*/
-		
-		
-		
+
 		return financialInstruments;
 	
 	}
