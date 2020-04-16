@@ -33,11 +33,16 @@
               <MenuItem mnemonicParsing="false" text="About" />
             </items>
           </Menu>
+            <Menu fx:id="yourOptions" mnemonicParsing="false" text="Options">
+              <items>
+                  <MenuItem fx:id="thisMenuItem" mnemonicParsing="false" onAction="#MainMenuBar" text="Portfolio " />
+              </items>
+            </Menu>
         </menus>
       </MenuBar>
    </top>
    <right>
-      <LineChart fx:id="mainGraphView" prefHeight="388.0" prefWidth="523.0" BorderPane.alignment="CENTER">
+      <LineChart fx:id="mainGraphView" prefHeight="390.0" prefWidth="659.0" BorderPane.alignment="CENTER">
         <xAxis>
           <CategoryAxis prefHeight="0.0" prefWidth="410.0" side="BOTTOM" fx:id="x" />
         </xAxis>
@@ -73,7 +78,7 @@
       </SplitPane>
    </bottom>
    <left>
-      <ScrollPane fx:id="mainScrollPane" hbarPolicy="NEVER" prefHeight="390.0" prefWidth="263.0" vbarPolicy="ALWAYS" BorderPane.alignment="CENTER">
+      <ScrollPane fx:id="mainScrollPane" hbarPolicy="NEVER" prefHeight="390.0" prefWidth="159.0" vbarPolicy="ALWAYS" BorderPane.alignment="CENTER">
          <content>
             <VBox fx:id="mainVBox" prefHeight="387.0" prefWidth="245.0" />
          </content>

@@ -3,32 +3,37 @@ package application;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import com.sun.glass.ui.MenuItem;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
+import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 public class SampleController implements Initializable{
 
 	@FXML
 	private MenuBar mainMenuBar;
 
-	/*@FXML
-	private ListView<String> mainListView;*/
 
 	@FXML
 	private LineChart<String, Integer> mainGraphView;
@@ -72,6 +77,11 @@ public class SampleController implements Initializable{
     
     @FXML
     private TextField analystRecommendation;
+    
+    @FXML
+    private Menu yourOptions;
+    
+   
 
 	/**
 	 * Initializing the class
@@ -79,16 +89,20 @@ public class SampleController implements Initializable{
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
 		
-		buttonPopulator();
-
+		ButtonPopulator();
+		MainMenuBar();
 
 	}
-
+	
+	
+	
+	
+	
 	/**
 	 * This method allows the list view to be populated 
 	 * @return ObservableList
 	 */
-	public void buttonPopulator(){
+	public void ButtonPopulator(){
 		
 		textBox1.setEditable(false);
 		textBox2.setEditable(false);
@@ -114,6 +128,8 @@ public class SampleController implements Initializable{
 			tempButton.setPrefWidth(240.0);
 			tempButton.setId("stockButtons");
 			mainVBox.getChildren().add(tempButton);
+			
+			
 			
 			
 			
@@ -166,7 +182,24 @@ public class SampleController implements Initializable{
 	}
 	
 	
-	
+	public void MainMenuBar() {
+		
+		
+		try {
+			
+			Parent part = FXMLLoader.load(getClass().getResource("/application/Portfolio.fxml"));
+			Stage stage = new Stage();
+			Scene scene = new Scene(part);
+			stage.setScene(scene);
+			stage.setFullScreen(true);
+			stage.show();
+			}
+			catch (Exception e1) {
+				// TODO: handle exception
+			}
+		
+		
+	}
 	
 	
 	public void registerEventHandlers() {

@@ -23,7 +23,7 @@ public class Main extends Application {
 			
 			
 			try {
-				Parent root = FXMLLoader.load(getClass().getResource("/application/Sample.fxml"));
+				Parent root = FXMLLoader.load(getClass().getResource("/application/Scene1.fxml"));
 				Scene scene = new Scene(root);
 				scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 				
