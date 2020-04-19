@@ -1,16 +1,91 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
 
-
-<AnchorPane fx:id="thisPortfolio" prefHeight="549.0" prefWidth="855.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1">
+<AnchorPane fx:id="thisPortfolio" prefHeight="549.0" prefWidth="855.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.PortfolioController">
    <children>
-      <ImageView fx:id="thisImageView" fitHeight="567.0" fitWidth="855.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@portfolio%20gui%20background.jpg" />
-         </image>
-      </ImageView>
+      <BorderPane prefHeight="620.0" prefWidth="1021.0">
+         <top>
+            <MenuBar prefHeight="29.0" prefWidth="828.0" BorderPane.alignment="CENTER">
+              <menus>
+                <Menu mnemonicParsing="false" text="File">
+                  <items>
+                    <MenuItem mnemonicParsing="false" text="Close" />
+                  </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Edit">
+                  <items>
+                    <MenuItem mnemonicParsing="false" text="Delete" />
+                  </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Help">
+                  <items>
+                    <MenuItem mnemonicParsing="false" text="About" />
+                  </items>
+                </Menu>
+                  <Menu mnemonicParsing="false" text="Options">
+                    <items>
+                      <MenuItem fx:id="thisStockMarketDataMenuItem" mnemonicParsing="false" text="Stock Market Data" />
+                        <MenuItem fx:id="thisRiskAssessmentMenuItem" mnemonicParsing="false" text="Risk Assesment Test" />
+                    </items>
+                  </Menu>
+              </menus>
+            </MenuBar>
+         </top>
+         <left>
+            <ScrollPane hbarPolicy="NEVER" prefHeight="442.0" prefWidth="190.0" vbarPolicy="ALWAYS" BorderPane.alignment="CENTER">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0">
+                     <children>
+                        <VBox fx:id="thisVBox" layoutX="-2.0" prefHeight="590.0" prefWidth="190.0">
+                           <children>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Portfolio Builder" textAlignment="CENTER" wrappingWidth="189.22900390625" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </AnchorPane>
+              </content>
+            </ScrollPane>
+         </left>
+         <center>
+            <LineChart prefHeight="433.0" prefWidth="788.0" BorderPane.alignment="CENTER">
+              <xAxis>
+                <CategoryAxis fx:id="timeCategoryAxis" label="Time" prefHeight="32.0" prefWidth="476.0" side="BOTTOM" />
+              </xAxis>
+              <yAxis>
+                <NumberAxis fx:id="stockReturnPercentageNumberAxis" label="Stock Return Percentage" side="LEFT" />
+              </yAxis>
+            </LineChart>
+         </center>
+         <bottom>
+            <Pane prefHeight="158.0" prefWidth="1021.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Text layoutX="285.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Metric One" />
+                  <Text layoutX="587.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Metric Two" />
+                  <Text layoutX="871.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Metric Three" wrappingWidth="72.96923828125" />
+                  <TextField fx:id="metricOne" layoutX="235.0" layoutY="66.0" prefHeight="51.0" prefWidth="160.0" />
+                  <TextField fx:id="metricTwo" layoutX="537.0" layoutY="66.0" prefHeight="51.0" prefWidth="160.0" />
+                  <TextField fx:id="metricThree" layoutX="827.0" layoutY="66.0" prefHeight="51.0" prefWidth="160.0" />
+                  <Button fx:id="weeklyButton" layoutX="56.0" layoutY="31.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="85.0" text="Weekly" />
+                  <Button fx:id="monthlyButton" layoutX="56.0" layoutY="66.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="85.0" text="Monthly" />
+                  <Button fx:id="yearlyButton" layoutX="56.0" layoutY="104.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="87.0" text="Yearly" />
+                  <Text layoutX="64.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Time" textAlignment="CENTER" wrappingWidth="71.22900390625" />
+               </children>
+            </Pane>
+         </bottom>
+      </BorderPane>
    </children>
 </AnchorPane>
