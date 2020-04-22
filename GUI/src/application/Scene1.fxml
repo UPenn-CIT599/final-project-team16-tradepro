@@ -15,7 +15,7 @@
          </image>
       </ImageView>
       <Text layoutX="207.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome to Serenity Investments" wrappingWidth="187.22900390625" />
-      <Button fx:id="yourStockInfo" layoutX="213.0" layoutY="44.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="178.0" text="Stock Market Data" />
+      <Button fx:id="yourStockInfo" layoutX="213.0" layoutY="44.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="178.0" text="Risk Assessment Test" />
       <Button fx:id="yourPortfolio" layoutX="213.0" layoutY="90.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="178.0" text="Portfolio Builder" />
       <Text layoutX="470.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DJIA" />
       <Text layoutX="79.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="S&amp;P500" />

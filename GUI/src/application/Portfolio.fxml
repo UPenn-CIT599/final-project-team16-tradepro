@@ -19,26 +19,25 @@
    <children>
       <BorderPane prefHeight="620.0" prefWidth="1021.0">
          <top>
-            <MenuBar prefHeight="29.0" prefWidth="828.0" BorderPane.alignment="CENTER">
+            <MenuBar fx:id="menuBar" prefHeight="29.0" prefWidth="828.0" BorderPane.alignment="CENTER">
               <menus>
-                <Menu mnemonicParsing="false" text="File">
+                <Menu fx:id="fileButton" mnemonicParsing="false" text="File">
                   <items>
-                    <MenuItem mnemonicParsing="false" text="Close" />
+                    <MenuItem fx:id="menuItemClose" mnemonicParsing="false" text="Close" />
                   </items>
                 </Menu>
-                <Menu mnemonicParsing="false" text="Edit">
+                <Menu fx:id="editButton" mnemonicParsing="false" text="Edit">
                   <items>
-                    <MenuItem mnemonicParsing="false" text="Delete" />
+                    <MenuItem fx:id="menuItemDelete" mnemonicParsing="false" text="Delete" />
                   </items>
                 </Menu>
-                <Menu mnemonicParsing="false" text="Help">
+                <Menu fx:id="helpButton" mnemonicParsing="false" text="Help">
                   <items>
-                    <MenuItem mnemonicParsing="false" text="About" />
+                    <MenuItem fx:id="menuItemAbout" mnemonicParsing="false" text="About" />
                   </items>
                 </Menu>
-                  <Menu mnemonicParsing="false" text="Options">
+                  <Menu fx:id="optionsButton" mnemonicParsing="false" text="Options">
                     <items>
-                      <MenuItem fx:id="thisStockMarketDataMenuItem" mnemonicParsing="false" text="Stock Market Data" />
                         <MenuItem fx:id="thisRiskAssessmentMenuItem" mnemonicParsing="false" text="Risk Assesment Test" />
                     </items>
                   </Menu>
@@ -52,7 +51,7 @@
                      <children>
                         <VBox fx:id="thisVBox" layoutX="-2.0" prefHeight="590.0" prefWidth="190.0">
                            <children>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Portfolio Builder" textAlignment="CENTER" wrappingWidth="189.22900390625" />
+                              <Text fill="#eee2e2" strokeType="OUTSIDE" strokeWidth="0.0" text="Portfolio Builder" textAlignment="CENTER" wrappingWidth="189.22900390625" />
                            </children>
                         </VBox>
                      </children>
@@ -63,7 +62,7 @@
          <center>
             <LineChart prefHeight="433.0" prefWidth="788.0" BorderPane.alignment="CENTER">
               <xAxis>
-                <CategoryAxis fx:id="timeCategoryAxis" label="Time" prefHeight="32.0" prefWidth="476.0" side="BOTTOM" />
+                <CategoryAxis fx:id="timeCategoryAxis" label="Time" prefHeight="32.0" prefWidth="748.0" tickLabelFill="#0a0202" />
               </xAxis>
               <yAxis>
                 <NumberAxis fx:id="stockReturnPercentageNumberAxis" label="Stock Return Percentage" side="LEFT" />
@@ -73,16 +72,16 @@
          <bottom>
             <Pane prefHeight="158.0" prefWidth="1021.0" BorderPane.alignment="CENTER">
                <children>
-                  <Text layoutX="285.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Metric One" />
-                  <Text layoutX="587.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Metric Two" />
-                  <Text layoutX="871.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Metric Three" wrappingWidth="72.96923828125" />
-                  <TextField fx:id="metricOne" layoutX="235.0" layoutY="66.0" prefHeight="51.0" prefWidth="160.0" />
-                  <TextField fx:id="metricTwo" layoutX="537.0" layoutY="66.0" prefHeight="51.0" prefWidth="160.0" />
-                  <TextField fx:id="metricThree" layoutX="827.0" layoutY="66.0" prefHeight="51.0" prefWidth="160.0" />
+                  <TextField fx:id="metricOne" layoutX="263.0" layoutY="68.0" prefHeight="51.0" prefWidth="160.0" />
+                  <TextField fx:id="metricTwo" layoutX="552.0" layoutY="66.0" prefHeight="51.0" prefWidth="160.0" />
+                  <TextField fx:id="metricThree" layoutX="837.0" layoutY="66.0" prefHeight="51.0" prefWidth="160.0" />
                   <Button fx:id="weeklyButton" layoutX="56.0" layoutY="31.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="85.0" text="Weekly" />
                   <Button fx:id="monthlyButton" layoutX="56.0" layoutY="66.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="85.0" text="Monthly" />
                   <Button fx:id="yearlyButton" layoutX="56.0" layoutY="104.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="87.0" text="Yearly" />
-                  <Text layoutX="64.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Time" textAlignment="CENTER" wrappingWidth="71.22900390625" />
+                  <Text fill="#eee2e2" layoutX="64.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Time" textAlignment="CENTER" wrappingWidth="71.22900390625" />
+                  <Text fill="#eee2e2" layoutX="307.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Metric One" textAlignment="CENTER" wrappingWidth="71.22900390625" />
+                  <Text fill="#eee2e2" layoutX="596.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Metric Two" textAlignment="CENTER" wrappingWidth="71.22900390625" />
+                  <Text fill="#eee2e2" layoutX="881.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Metric Three" textAlignment="CENTER" wrappingWidth="71.22900390625" />
                </children>
             </Pane>
          </bottom>

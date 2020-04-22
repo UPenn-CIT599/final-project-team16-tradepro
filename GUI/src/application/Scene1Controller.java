@@ -45,6 +45,7 @@ public class Scene1Controller implements Initializable{
 
 		Button1Listener();
 		Button2Listener();
+		
 		try {
 			setDJIAandSandPText();
 		} catch (IOException e) {
@@ -62,11 +63,11 @@ public class Scene1Controller implements Initializable{
 
 			try {
 
-				Parent part = FXMLLoader.load(getClass().getResource("/application/Sample.fxml"));
+				Parent part = FXMLLoader.load(getClass().getResource("/application/RiskAssessmentTest.fxml"));
 				Stage stage = new Stage();
 				Scene scene = new Scene(part);
+				scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 				stage.setScene(scene);
-				stage.setFullScreen(true);
 				stage.show();
 			}
 			catch (Exception e1) {
@@ -89,7 +90,6 @@ public class Scene1Controller implements Initializable{
 				Stage stage = new Stage();
 				Scene scene = new Scene(part);
 				scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
-
 				stage.setScene(scene);
 				stage.show();
 			}
@@ -111,7 +111,6 @@ public class Scene1Controller implements Initializable{
 		djiaShower.setText(sp.DJIAReader());
 		sandp500Shower.setText(sp.SandPReader());
 		sandp500Shower.centerShapeProperty();
-		sandp500Shower.setFont(Font.font("Regular"));
 
 	}
 
