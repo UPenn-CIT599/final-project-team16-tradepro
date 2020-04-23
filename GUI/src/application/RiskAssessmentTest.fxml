@@ -5,6 +5,7 @@
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Text?>
@@ -48,7 +49,7 @@
             <TextField fx:id="q2TextBox" layoutX="69.0" layoutY="307.0" prefHeight="51.0" prefWidth="184.0" />
             <TextField fx:id="q3TextBox" layoutX="66.0" layoutY="446.0" prefHeight="51.0" prefWidth="184.0" />
             <Button layoutX="395.0" layoutY="112.0" mnemonicParsing="false" text="See Results" />
-            <MenuButton layoutX="122.0" layoutY="196.0" mnemonicParsing="false" text="Answer">
+            <MenuButton fx:id="q1Menubutton" layoutX="122.0" layoutY="196.0" mnemonicParsing="false" onAction="#Question1Return" text="Answer">
               <items>
                 <MenuItem fx:id="ratq1MenuItem1" mnemonicParsing="false" text="Less than 1 year" />
                 <MenuItem fx:id="ratq1MenuItem2" mnemonicParsing="false" text="1 - 5 years" />
@@ -57,7 +58,7 @@
                   <MenuItem fx:id="ratq1MenuItem5" mnemonicParsing="false" text="15 + years" />
               </items>
             </MenuButton>
-            <MenuButton layoutX="122.0" layoutY="307.0" mnemonicParsing="false" text="Answer">
+            <MenuButton fx:id="q2Menubutton" layoutX="122.0" layoutY="307.0" mnemonicParsing="false" onAction="#Question2Return" text="Answer">
                <items>
                   <MenuItem fx:id="ratq2MenuItem1" mnemonicParsing="false" text="2 years or less" />
                   <MenuItem fx:id="ratq2MenuItem2" mnemonicParsing="false" text="3-5 years" />
@@ -67,7 +68,7 @@
                </items>
             </MenuButton>
             <Text fill="#fcebeb" layoutX="63.0" layoutY="404.0" strokeType="OUTSIDE" strokeWidth="0.0" text="When making a long-term investment, I plan to keep the money invested for . . ." wrappingWidth="195.29833984375" />
-            <MenuButton layoutX="119.0" layoutY="446.0" mnemonicParsing="false" text="Answer">
+            <MenuButton fx:id="q3Menubutton" layoutX="119.0" layoutY="446.0" mnemonicParsing="false" text="Answer">
                <items>
                   <MenuItem fx:id="ratq3MenuItem1" mnemonicParsing="false" text="1-2 years" />
                   <MenuItem fx:id="ratq3MenuItem2" mnemonicParsing="false" text="3-4 years" />
@@ -78,7 +79,7 @@
             </MenuButton>
             <Text fill="#f5e3e3" layoutX="69.0" layoutY="546.0" strokeType="OUTSIDE" strokeWidth="0.0" text="From September 2008 through November 2008, U.S. stocks lost more than 31% of their value. If I owned a stock investment that lost 30% of its value in a short period, I would … (If you owned stocks in 2008, please select the answer that matches your actions at that time.)" wrappingWidth="184.0" />
             <TextField fx:id="q4TextBox" layoutX="69.0" layoutY="672.0" prefHeight="51.0" prefWidth="184.0" />
-            <MenuButton layoutX="119.0" layoutY="672.0" mnemonicParsing="false" text="Answer">
+            <MenuButton fx:id="q4Menubutton" layoutX="119.0" layoutY="672.0" mnemonicParsing="false" text="Answer">
                <items>
                   <MenuItem fx:id="ratq4MenuItem1" mnemonicParsing="false" text="Sell all of the remaining investments" />
                   <MenuItem fx:id="ratq4MenuItem2" mnemonicParsing="false" text="Sell some of the remaining investments" />
@@ -89,7 +90,7 @@
             </MenuButton>
             <Text fill="#fcf0f0" layoutX="590.0" layoutY="580.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Generally, I prefer investments with few dramatic ups or downs in value, and I am willing to accept the lower returns these investments may produce." wrappingWidth="203.90966796875" />
             <TextField fx:id="q12TextBox" layoutX="598.0" layoutY="672.0" prefHeight="51.0" prefWidth="184.0" />
-            <MenuButton layoutX="653.0" layoutY="672.0" mnemonicParsing="false" text="Answer">
+            <MenuButton fx:id="q12Menubutton" layoutX="653.0" layoutY="672.0" mnemonicParsing="false" text="Answer">
                <items>
                   <MenuItem fx:id="ratq12MenuItem1" mnemonicParsing="false" text="I strongly disagree" />
                   <MenuItem fx:id="ratq12MenuItem2" mnemonicParsing="false" text="I disagree" />
@@ -100,7 +101,7 @@
             </MenuButton>
             <Text fill="#fcebeb" layoutX="347.0" layoutY="269.0" strokeType="OUTSIDE" strokeWidth="0.0" text="I would invest in a mutual fund based only on a brief conversation with a friend, coworker or relative." wrappingWidth="203.90966796875" />
             <TextField fx:id="q6TextBox" layoutX="344.0" layoutY="307.0" prefHeight="51.0" prefWidth="184.0" />
-            <MenuButton layoutX="397.0" layoutY="307.0" mnemonicParsing="false" text="Answer">
+            <MenuButton fx:id="q6Menubutton" layoutX="397.0" layoutY="307.0" mnemonicParsing="false" text="Answer">
                <items>
                   <MenuItem fx:id="ratq6MenuItem1" mnemonicParsing="false" text="I strongly disagree" />
                   <MenuItem fx:id="ratq6MenuItem2" mnemonicParsing="false" text="I disagree" />
@@ -111,7 +112,7 @@
             </MenuButton>
             <Text fill="#f8e9e9" layoutX="344.0" layoutY="545.0" strokeType="OUTSIDE" strokeWidth="0.0" text="From September 2008 through October 2008, U.S. bonds lost nearly 4% of their value. If I owned a bond investment that lost almost 4% of its value in a short period, I would … (If you owned bonds in 2008, please select the answer that matches your actions at that time.)" wrappingWidth="183.9999999999999" />
             <TextField fx:id="q8TextBox" layoutX="344.0" layoutY="672.0" prefHeight="51.0" prefWidth="184.0" />
-            <MenuButton layoutX="397.0" layoutY="672.0" mnemonicParsing="false" text="Answer">
+            <MenuButton fx:id="q8Menubutton" layoutX="397.0" layoutY="672.0" mnemonicParsing="false" text="Answer">
                <items>
                   <MenuItem fx:id="ratq8MenuItem1" mnemonicParsing="false" text="Sell all of the remaining investment" />
                   <MenuItem fx:id="ratq8MenuItem2" mnemonicParsing="false" text="Sell some of the remaining investment" />
@@ -122,7 +123,7 @@
             </MenuButton>
             <Text fill="#fceeee" layoutX="344.0" layoutY="412.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Others describe you as ambitious and willing to take risks..." wrappingWidth="183.9999999999999" />
             <TextField fx:id="q7TextBox" layoutX="344.0" layoutY="446.0" prefHeight="51.0" prefWidth="184.0" />
-            <MenuButton layoutX="397.0" layoutY="446.0" mnemonicParsing="false" text="Answer">
+            <MenuButton fx:id="q7Menubutton" layoutX="397.0" layoutY="446.0" mnemonicParsing="false" text="Answer">
                <items>
                   <MenuItem fx:id="ratq7MenuItem1" mnemonicParsing="false" text="I strongly disagree" />
                   <MenuItem fx:id="ratq7MenuItem2" mnemonicParsing="false" text="I disagree" />
@@ -133,7 +134,7 @@
             </MenuButton>
             <Text fill="#fff2f2" layoutX="592.0" layoutY="173.0" strokeType="OUTSIDE" strokeWidth="0.0" text="My current and future income sources (such as salary or pension) are . . ." wrappingWidth="213.90966796875" />
             <TextField fx:id="q9TextBox" layoutX="600.0" layoutY="196.0" prefHeight="51.0" prefWidth="184.0" />
-            <MenuButton layoutX="650.0" layoutY="196.0" mnemonicParsing="false" text="Answer">
+            <MenuButton fx:id="q9Menubutton" layoutX="650.0" layoutY="196.0" mnemonicParsing="false" text="Answer">
                <items>
                   <MenuItem fx:id="ratq9MenuItem1" mnemonicParsing="false" text="Very unstable" />
                   <MenuItem fx:id="ratq9MenuItem2" mnemonicParsing="false" text="Unstable" />
@@ -144,7 +145,7 @@
             </MenuButton>
             <Text fill="#fceeee" layoutX="592.0" layoutY="269.0" strokeType="OUTSIDE" strokeWidth="0.0" text="When it comes to investing in stock or bond mutual funds (or individual stocks or bonds), I would describe myself as . . ." wrappingWidth="213.90966796875" />
             <TextField fx:id="q10TextBox" layoutX="597.0" layoutY="309.0" prefHeight="51.0" prefWidth="184.0" />
-            <MenuButton layoutX="650.0" layoutY="310.0" mnemonicParsing="false" text="Answer">
+            <MenuButton fx:id="q10Menubutton" layoutX="650.0" layoutY="310.0" mnemonicParsing="false" text="Answer">
                <items>
                   <MenuItem fx:id="ratq10MenuItem1" mnemonicParsing="false" text="Very inexperienced" />
                   <MenuItem fx:id="ratq10MenuItem2" mnemonicParsing="false" text="Somewhat inexperienced" />
@@ -155,7 +156,7 @@
             </MenuButton>
             <Text fill="#fcefef" layoutX="597.0" layoutY="395.0" strokeType="OUTSIDE" strokeWidth="0.0" text="When the market goes down, I tend to sell some of my riskier investments and put the money in safer investments." wrappingWidth="203.90966796875" />
             <TextField fx:id="q11TextBox" layoutX="597.0" layoutY="448.0" prefHeight="51.0" prefWidth="184.0" />
-            <MenuButton layoutX="653.0" layoutY="448.0" mnemonicParsing="false" text="Answer">
+            <MenuButton fx:id="q11Menubutton" layoutX="653.0" layoutY="448.0" mnemonicParsing="false" text="Answer">
                <items>
                   <MenuItem fx:id="ratq11MenuItem1" mnemonicParsing="false" text="I strongly disagree" />
                   <MenuItem fx:id="ratq11MenuItem2" mnemonicParsing="false" text="I disagree" />
@@ -166,7 +167,7 @@
             </MenuButton>
             <Text fill="#ffeeee" layoutX="347.0" layoutY="173.0" strokeType="OUTSIDE" strokeWidth="0.0" text="I enjoy gambling, and losing money does not cause me to be shaken" wrappingWidth="203.90966796875" />
             <TextField fx:id="q5TextBox" layoutX="344.0" layoutY="198.0" prefHeight="51.0" prefWidth="184.0" />
-            <MenuButton layoutX="397.0" layoutY="198.0" mnemonicParsing="false" text="Answer">
+            <MenuButton fx:id="q5Menubutton" layoutX="397.0" layoutY="198.0" mnemonicParsing="false" text="Answer">
                <items>
                   <MenuItem fx:id="ratq5MenuItem1" mnemonicParsing="false" text="I strongly disagree" />
                   <MenuItem fx:id="ratq5MenuItem2" mnemonicParsing="false" text="I disagree" />
@@ -175,6 +176,7 @@
                   <MenuItem fx:id="ratq5MenuItem5" mnemonicParsing="false" text="I strongly agree" />
                </items>
             </MenuButton>
+            <RadioButton fx:id="disJauntTest" layoutX="76.0" layoutY="130.0" mnemonicParsing="false" text="jaunt test" />
          </children>
       </AnchorPane>
    </children>
