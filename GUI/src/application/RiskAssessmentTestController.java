@@ -321,7 +321,7 @@ public class RiskAssessmentTestController implements Initializable{
     private RadioButton disJauntTest;
 
 
-	public int question1Value;
+	public int question1Value = 0;
 
 	public int question2Value;
 
@@ -460,8 +460,7 @@ public class RiskAssessmentTestController implements Initializable{
 				
 				thatGuy.getAndAdd(thisQues1.get(menuItem));
 				
-				this.jake = q1TextBox.getText();
-
+				this.question1Value = thisQues1.get(menuItem);
 
 			});
 				
@@ -495,7 +494,7 @@ public class RiskAssessmentTestController implements Initializable{
 			menuItem.setOnAction((ActionEvent e)->{
 
 
-				question2Value = thisQues1.get(menuItem);
+				this.question2Value = thisQues1.get(menuItem);
 
 
 				q2TextBox.setText(thisQues1.get(menuItem).toString());
@@ -533,7 +532,7 @@ public class RiskAssessmentTestController implements Initializable{
 			menuItem.setOnAction((ActionEvent e)->{
 
 
-				question3Value = thisQues1.get(menuItem);
+				this.question3Value = thisQues1.get(menuItem);
 
 
 				q3TextBox.setText(thisQues1.get(menuItem).toString());
@@ -568,7 +567,7 @@ public class RiskAssessmentTestController implements Initializable{
 			menuItem.setOnAction((ActionEvent e)->{
 
 
-				question4Value = thisQues1.get(menuItem);
+				this.question4Value = thisQues1.get(menuItem);
 
 
 				q4TextBox.setText(thisQues1.get(menuItem).toString());
@@ -603,7 +602,7 @@ public class RiskAssessmentTestController implements Initializable{
 			menuItem.setOnAction((ActionEvent e)->{
 
 
-				question5Value = thisQues1.get(menuItem);
+				this.question5Value = thisQues1.get(menuItem);
 
 
 				q5TextBox.setText(thisQues1.get(menuItem).toString());
@@ -638,7 +637,7 @@ public class RiskAssessmentTestController implements Initializable{
 			menuItem.setOnAction((ActionEvent e)->{
 
 
-				question6Value = thisQues1.get(menuItem);
+				this.question6Value = thisQues1.get(menuItem);
 
 
 				q6TextBox.setText(thisQues1.get(menuItem).toString());
@@ -673,7 +672,7 @@ public class RiskAssessmentTestController implements Initializable{
 			menuItem.setOnAction((ActionEvent e)->{
 
 
-				question7Value = thisQues1.get(menuItem);
+				this.question7Value = thisQues1.get(menuItem);
 
 
 				q7TextBox.setText(thisQues1.get(menuItem).toString());
@@ -708,7 +707,7 @@ public class RiskAssessmentTestController implements Initializable{
 			menuItem.setOnAction((ActionEvent e)->{
 
 
-				question8Value = thisQues1.get(menuItem);
+				this.question8Value = thisQues1.get(menuItem);
 
 
 				q8TextBox.setText(thisQues1.get(menuItem).toString());
@@ -743,7 +742,7 @@ public class RiskAssessmentTestController implements Initializable{
 			menuItem.setOnAction((ActionEvent e)->{
 
 
-				question9Value = thisQues1.get(menuItem);
+				this.question9Value = thisQues1.get(menuItem);
 
 
 				q9TextBox.setText(thisQues1.get(menuItem).toString());
@@ -779,7 +778,7 @@ public class RiskAssessmentTestController implements Initializable{
 
 
 				
-				question10Value = thisQues1.get(menuItem);
+				this.question10Value = thisQues1.get(menuItem);
 
 				q10TextBox.setText(thisQues1.get(menuItem).toString());
 
@@ -814,7 +813,7 @@ public class RiskAssessmentTestController implements Initializable{
 			menuItem.setOnAction((ActionEvent e)->{
 
 
-				question11Value = thisQues1.get(menuItem);
+				this.question11Value = thisQues1.get(menuItem);
 
 
 				q11TextBox.setText(thisQues1.get(menuItem).toString());
@@ -849,7 +848,7 @@ public class RiskAssessmentTestController implements Initializable{
 			menuItem.setOnAction((ActionEvent e)->{
 
 
-				question12Value = thisQues1.get(menuItem);
+				this.question12Value = thisQues1.get(menuItem);
 
 
 				q12TextBox.setText(thisQues1.get(menuItem).toString());
@@ -864,11 +863,19 @@ public class RiskAssessmentTestController implements Initializable{
 	/*
 	 * 
 	 */
+	@FXML
 	public int AddEmUp() {
 		
-	/*int value = jake + question2Value + question3Value
+		if(question5Value == 0) {
+			System.out.println("not changing");
+		}else {
+			System.out.println(question5Value);
+		}
+		System.out.println(question5Value);
+		
+		int value = (question1Value + question2Value + question3Value
 			+question4Value+question5Value+question6Value+question7Value+question8Value
-			+question9Value+question10Value+question11Value+question12Value;*/
+			+question9Value+question10Value+question11Value+question12Value)/12;
 		
 	
 		

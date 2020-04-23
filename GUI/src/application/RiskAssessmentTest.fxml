@@ -5,7 +5,6 @@
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Text?>
@@ -48,8 +47,8 @@
             <Text fill="#f8e7e7" layoutX="74.0" layoutY="283.0" strokeType="OUTSIDE" strokeWidth="0.0" text="As I withdraw money, I plan to spend money over  a period of ..." wrappingWidth="195.29833984375" />
             <TextField fx:id="q2TextBox" layoutX="69.0" layoutY="307.0" prefHeight="51.0" prefWidth="184.0" />
             <TextField fx:id="q3TextBox" layoutX="66.0" layoutY="446.0" prefHeight="51.0" prefWidth="184.0" />
-            <Button layoutX="395.0" layoutY="112.0" mnemonicParsing="false" text="See Results" />
-            <MenuButton fx:id="q1Menubutton" layoutX="122.0" layoutY="196.0" mnemonicParsing="false" onAction="#Question1Return" text="Answer">
+            <Button fx:id="seeResultsButton" layoutX="395.0" layoutY="112.0" mnemonicParsing="false" onAction="#AddEmUp" text="See Results" />
+            <MenuButton fx:id="q1Menubutton" layoutX="122.0" layoutY="196.0" mnemonicParsing="false" text="Answer">
               <items>
                 <MenuItem fx:id="ratq1MenuItem1" mnemonicParsing="false" text="Less than 1 year" />
                 <MenuItem fx:id="ratq1MenuItem2" mnemonicParsing="false" text="1 - 5 years" />
@@ -176,7 +175,6 @@
                   <MenuItem fx:id="ratq5MenuItem5" mnemonicParsing="false" text="I strongly agree" />
                </items>
             </MenuButton>
-            <RadioButton fx:id="disJauntTest" layoutX="76.0" layoutY="130.0" mnemonicParsing="false" text="jaunt test" />
          </children>
       </AnchorPane>
    </children>
