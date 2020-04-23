@@ -866,24 +866,31 @@ public class RiskAssessmentTestController implements Initializable{
 	@FXML
 	public int AddEmUp() {
 		
-		if(question5Value == 0) {
-			System.out.println("not changing");
-		}else {
-			System.out.println(question5Value);
-		}
-		System.out.println(question5Value);
+		
 		
 		int value = (question1Value + question2Value + question3Value
 			+question4Value+question5Value+question6Value+question7Value+question8Value
 			+question9Value+question10Value+question11Value+question12Value)/12;
 		
 	
+		String str = String.valueOf(value);
+		
+		riskRating.setText(str);
+		
+		if(value ==1 || value== 2) {
+			recommendedInvestmentTimeline.setText("Monthly");
+		}else
+		if(value ==3||value==4) {
+			recommendedInvestmentTimeline.setText("Weekly");
+		}else
+		if(value ==5) {
+			recommendedInvestmentTimeline.setText("Daily");
+		}
 		
 		
 		
-		return 1;
-		
-		
+		return value;
+
 	}
 	
 	
