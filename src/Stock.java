@@ -1,7 +1,9 @@
+import java.io.IOException;
+import java.util.Date;
 import java.util.Map;
 
 /**
- * This class is to hold the info of individual stock
+ * This class is to hold and update the info of individual stock
  * @author Xi Peng
  *
  */
@@ -11,7 +13,7 @@ public class Stock {
 	private String name; //"shortName":"Microsoft Corporation"
 	private double change;  //"regularMarketChange":11.029999
 	private double changePercent;  //"regularMarketChangePercent":7.170252,
-	private int marketTime; //"regularMarketTime":1586202655
+	private Date marketTime; //"regularMarketTime":1586202655
 	private double price; //"regularMarketPrice":164.86
 	private double dayHigh;  //"regularMarketDayHigh":164.99
 	private double dayLow;  //"regularMarketDayLow":157.59
@@ -22,108 +24,61 @@ public class Stock {
 	private double todaysOpen;  //"regularMarketOpen":160.32
 	private double fiftyTwoWeekLow;  //"fiftyTwoWeekLow":118.58
 	private double fiftyTwoWeekHigh;  //"fiftyTwoWeekHigh":190.7
-	private Map<Integer, Double> history; //因为数据多而且时间范围和interval可以变化，所以不要实时更新，最好是单独列一个method来获取，由用户选择range和interval，或者根据range确定interval
+	private Map<Date, Double> history; 
 	
 	/**
 	 * Constructor. Requires the symbol of the stock as input, 
-	 * then call method of API class to get the info of the stock,
+	 * then call methods of API class to get the public available info of the stock,
 	 * and assign them to each instance variable.
 	 * @param symbol
+	 * @throws IOException 
+	 * @throws IllegalArgumentException 
 	 */
-	public Stock(String symbol) {
+	public Stock(String symbol) throws IllegalArgumentException, IOException {
 		this.symbol = symbol;
 		update();
 	}
 	
 	/**
-	 * Update info of the stock except for the history variable
+	 * Info of a stock changes realtimely, so it's good to create an independent method to update it
+	 * Get stock info except for the history data, because the history data could be huge, so has its own requesting method
+	 * Update the value of corresponding instance variables
+	 * @throws IOException 
+	 * @throws IllegalArgumentException 
 	 */
-	public void update() {
+	public void update() throws IllegalArgumentException, IOException {
 		Map<String, String> newQuote = API.parseQuoteResponse(API.getResponse(API.constructUrl(this.symbol)));
 		
-		setCurrency(newQuote.get("currency"));
-		setName(newQuote.get("shortName"));
-		setChange(Double.parseDouble(newQuote.get("regularMarketChange")));
-		setChangePercent(Double.parseDouble(newQuote.get("regularMarketChangePercent")));
-		setMarketTime(Integer.parseInt(newQuote.get("regularMarketTime")));
-		setPrice(Double.parseDouble(newQuote.get("regularMarketPrice")));
-		setDayHigh(Double.parseDouble(newQuote.get("regularMarketDayHigh")));
-		setDayLow(Double.parseDouble(newQuote.get("regularMarketDayLow")));
-		setVolumn(Integer.parseInt(newQuote.get("regularMarketVolume")));
-		setPreviousClose(Double.parseDouble(newQuote.get("regularMarketPreviousClose")));
-		setBid(Double.parseDouble(newQuote.get("bid")));
-		setAsk(Double.parseDouble(newQuote.get("ask")));
-		setTodaysOpen(Double.parseDouble(newQuote.get("regularMarketOpen")));
-		setFiftyTwoWeekLow(Double.parseDouble(newQuote.get("fiftyTwoWeekLow")));
-		setFiftyTwoWeekHigh(Double.parseDouble(newQuote.get("fiftyTwoWeekHigh")));
+		this.currency = newQuote.get("currency");
+		this.name = newQuote.get("shortName");
+		this.change = Double.parseDouble(newQuote.get("regularMarketChange"));
+		this.changePercent = Double.parseDouble(newQuote.get("regularMarketChangePercent"));
+		this.marketTime = new Date(Long.parseLong(newQuote.get("regularMarketTime")) * 1000);
+		this.price = Double.parseDouble(newQuote.get("regularMarketPrice"));
+		this.dayHigh = Double.parseDouble(newQuote.get("regularMarketDayHigh"));
+		this.dayLow = Double.parseDouble(newQuote.get("regularMarketDayLow"));
+		this.volumn = Integer.parseInt(newQuote.get("regularMarketVolume"));
+		this.previousClose = Double.parseDouble(newQuote.get("regularMarketPreviousClose"));
+		this.bid = Double.parseDouble(newQuote.get("bid"));
+		this.ask = Double.parseDouble(newQuote.get("ask"));
+		this.todaysOpen = Double.parseDouble(newQuote.get("regularMarketOpen"));
+		this.fiftyTwoWeekLow = Double.parseDouble(newQuote.get("fiftyTwoWeekLow"));
+		this.fiftyTwoWeekHigh = Double.parseDouble(newQuote.get("fiftyTwoWeekHigh"));
 	}
 	
 	/**
-	 * Assign value to the history variable by calling API class methods, with user decided interval as argument
+	 * Get the history data of a stock with API class's methods, and assign it to the history variable, 
+	 * with user decided time range and interval as arguments
 	 * @param interval - String. User decided time interval
+	 * @return TreeMap - <Date, Double>. The history data with time as keys and price as values ordered by time
+	 * @throws IOException 
+	 * @throws IllegalArgumentException 
 	 */
-	public void getHistory(String interval) {
-		Map<Integer, Double> history = API.parseHistoryResponse(API.getResponse(API.constructUrl(this.symbol, interval)));
+	public Map<Date, Double> getHistory(String range, String interval) 
+			throws IllegalArgumentException, IOException {
+		Map<Date, Double> history = API.parseHistoryResponse(API.getResponse(API.constructUrl(this.symbol, range, interval)));
 		this.history = history;
-	}
-
-	private void setName(String name) {
-		this.name = name;
-	}
-
-	private void setCurrency(String currency) {
-		this.currency = currency;
-	}
-	private void setPrice(double price) {
-		this.price = price;
-	}
-
-	private void setMarketTime(int marketTime) {
-		this.marketTime = marketTime;
-	}
-
-	private void setChange(double change) {
-		this.change = change;
-	}
-
-	private void setChangePercent(double changePercent) {
-		this.changePercent = changePercent;
-	}
-
-	private void setBid(double bid) {
-		this.bid = bid;
-	}
-
-	private void setAsk(double ask) {
-		this.ask = ask;
-	}
-
-	private void setDayHigh(double dayHigh) {
-		this.dayHigh = dayHigh;
-	}
-
-	private void setDayLow(double dayLow) {
-		this.dayLow = dayLow;
-	}
-
-	private void setVolumn(int volumn) {
-		this.volumn = volumn;
-	}
-
-	private void setPreviousClose(double previousClose) {
-		this.previousClose = previousClose;
-	}
-
-	private void setTodaysOpen(double todaysOpen) {
-		this.todaysOpen = todaysOpen;
-	}
-
-	private void setFiftyTwoWeekLow(double fiftyTwoWeekLow) {
-		this.fiftyTwoWeekLow = fiftyTwoWeekLow;
-	}
-
-	private void setFiftyTwoWeekHigh(double fiftyTwoWeekHigh) {
-		this.fiftyTwoWeekHigh = fiftyTwoWeekHigh;
+		return this.history;
 	}
 
 	public String getSymbol() {
@@ -142,7 +97,7 @@ public class Stock {
 		return price;
 	}
 
-	public int getMarketTime() {
+	public Date getMarketTime() {
 		return marketTime;
 	}
 
@@ -189,8 +144,5 @@ public class Stock {
 	public double getFiftyTwoWeekHigh() {
 		return fiftyTwoWeekHigh;
 	}
-
-	public Map<Integer, Double> getHistory() {
-		return history;
-	}
+	
 }
