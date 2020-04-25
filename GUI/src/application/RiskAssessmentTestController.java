@@ -864,7 +864,7 @@ public class RiskAssessmentTestController implements Initializable{
 	 * 
 	 */
 	@FXML
-	public int AddEmUp() {
+	public String AddEmUp() {
 		
 		
 		
@@ -873,29 +873,27 @@ public class RiskAssessmentTestController implements Initializable{
 			+question9Value+question10Value+question11Value+question12Value)/12;
 		
 	
-		String str = String.valueOf(value);
+		String str = "";
 		
-		riskRating.setText(str);
+		
 		
 		if(value ==1 || value== 2) {
 			recommendedInvestmentTimeline.setText("Monthly");
+			str = "Low";
 		}else
 		if(value ==3||value==4) {
 			recommendedInvestmentTimeline.setText("Bi-Weekly");
+			str = "Mid";
 		}else
 		if(value ==5) {
 			recommendedInvestmentTimeline.setText("Weekly");
+			str = "High";
 		}
 		
+		riskRating.setText(str);
 		
-		
-		return value;
+		return str;
 
 	}
-	
-	
-	
-	
-
 
 }

@@ -1,6 +1,3 @@
-package application;
-
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -43,22 +40,20 @@ public class Analysis {
 	
 	
 	/* weights on each stock we need to invest*/
-	//private ArrayList<Double> weights;
+	private ArrayList<Double> weights;
 	
 	/* risks on each stock we need to invest*/
-	//private ArrayList<Double> risks;
+	private ArrayList<Double> risks;
 	
 	/* recommendation on each stock we need to invest*/
-	//private ArrayList<String> advice;
+	private ArrayList<String> advice;
 	
 	/**
 	 * Assign value to the stockPrice 2D array and stockDate array 
 	 * @param  symbols - String[] containing stock symbols, will be given by the GUI class
 	 * @param  score - String, will be calculated and given by the GUI class
-	 * @throws IOException 
-	 * @throws IllegalArgumentException 
 	 */
-	public void getStockprice(String[] symbols, String score) throws IllegalArgumentException, IOException {
+	public void getStockprice(String[] symbols, String score) {
 		
 		// Get time range of history data of stocks based on user's score
 		String interval = "1d";
@@ -406,15 +401,13 @@ public class Analysis {
 	 * @return array of weights on each stock we need to invest
 	 * @throws Exception 
 	 */
-	public ArrayList<double[][]> backTesting(int windowSize, int balancePeriod, int strategy) throws Exception{
+	public double[][] backTesting(int windowSize, int balancePeriod, int strategy) throws Exception{
 		
 		/*int strategy = 0; equal weighted strategy*/
 		
 		int rollen = returnData.length;
 		
 		int collen = returnData[0].length;
-		
-		ArrayList<double[][]> returnResult = new ArrayList<double[][]>();
 		
 		
 		//transform into SimplexMatrix for matrix operation
@@ -482,15 +475,12 @@ public class Analysis {
 		
 		finalReturn = getFinalReturn(hisReturn);
 		
-		returnResult.add(hisReturn);
-		
-		returnResult.add(finalReturn);
 		
 		/*System.out.println(finalReturn[0][window[0].length - 2]);
 		
 		System.out.println(finalReturn[1][window[0].length - 2]);*/
 		
-		return returnResult;
+		return finalReturn;
 		
 		
 		

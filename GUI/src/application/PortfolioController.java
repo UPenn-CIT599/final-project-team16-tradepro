@@ -4,6 +4,7 @@ import java.awt.Desktop.Action;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -228,7 +229,11 @@ public class PortfolioController implements Initializable{
 		 String Score = "High";
 
 		 //Portfoilo gets built
+		 
+		 RiskAssessmentTestController RATC = new RiskAssessmentTestController();
 
+		// System.out.println(RATC.AddEmUp());
+		 
 		 AnalysisRunner runtest = new AnalysisRunner(Score);
 
 
@@ -253,10 +258,12 @@ public class PortfolioController implements Initializable{
 
 			 double[][]histReturn	= runtest.getHistReturn();
 			 double[][] Weights = runtest.getWeights();
-			 Calendar[] investmentDate = runtest.getInvestmentDate();
+			 String[] investmentDate = runtest.getInvestmentDate();
 			 String[]risks = runtest.getRisks();
 
-
+			 metricOne.setText("" + runtest.getDrawDown());
+			 metricTwo.setText("" + runtest.getSharpeRatio());
+			 metricThree.setText("" + runtest.getRiskRating());
 
 			 ArrayList<Double>holder = new ArrayList<Double>();
 
@@ -267,10 +274,16 @@ public class PortfolioController implements Initializable{
 			 }
 
 			 ArrayList<String>timeHolder = new ArrayList<String>();
-
-			 for (Calendar string : investmentDate) {
-				 timeHolder.add(string.getTime().toString());
+			 ////////////////////////////////////
+			 ////////////////////////////////////
+			 ////////////////////////////////////
+			 for (String string : investmentDate) {
+				 timeHolder.add(string);
 			 }
+			 ////////////////////////////////////
+			 ////////////////////////////////////
+			 ////////////////////////////////////
+			 ////////////////////////////////////
 
 			 ArrayList<Double>firstHalfHolder = new ArrayList<Double>();
 
