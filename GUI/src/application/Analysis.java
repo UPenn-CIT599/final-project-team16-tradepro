@@ -4,15 +4,16 @@ package application;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
 import org.ejml.simple.SimpleMatrix;
 
-import yahoofinance.Stock;
-import yahoofinance.YahooFinance;
-import yahoofinance.histquotes.HistoricalQuote;
-import yahoofinance.histquotes.Interval;
+//import yahoofinance.Stock;
+//import yahoofinance.YahooFinance;
+//import yahoofinance.histquotes.HistoricalQuote;
+//import yahoofinance.histquotes.Interval;
 
 import java.io.IOException;
 /*import java.io.IOException;*/
@@ -33,104 +34,89 @@ public class Analysis {
 	private double[][] returnData;
 	
 	/* history of stock price date */
-	private Calendar[] stockDate;
+	private Date[] stockDate; //private Calendar[] stockDate;
 	
 	private double[][] benchReturn;
 	
-	/* average log return of stocks and convaraince matrix*/
+	/* average log return of stocks and covariance matrix*/
 	ArrayList<SimpleMatrix> result;
 	
 	
 	/* weights on each stock we need to invest*/
-	private ArrayList<Double> weights;
+	//private ArrayList<Double> weights;
 	
 	/* risks on each stock we need to invest*/
-	private ArrayList<Double> risks;
+	//private ArrayList<Double> risks;
 	
 	/* recommendation on each stock we need to invest*/
-	private ArrayList<String> advice;
-	
-	
-	
-	
- 
+	//private ArrayList<String> advice;
 	
 	/**
-	 * Set the matrix of stock price and stock date 
-	 * @param  symbols are the string containing stock tick names
-	 * @param  stocks are the map contains object stocks
-	 *
+	 * Assign value to the stockPrice 2D array and stockDate array 
+	 * @param  symbols - String[] containing stock symbols, will be given by the GUI class
+	 * @param  score - String, will be calculated and given by the GUI class
+	 * @throws IOException 
+	 * @throws IllegalArgumentException 
 	 */
-	
-	public void getStockprice(String[] symbols, Map<String, Stock> stocks) throws IOException{
+	public void getStockprice(String[] symbols, String score) throws IllegalArgumentException, IOException {
 		
+		// Get time range of history data of stocks based on user's score
+		String interval = "1d";
+		String range;
+		if (score.equals("High")) {
+			range = "1y";
+		} else if (score.equals("Mid")) {
+			range = "2y";
+		} else {
+			range = "5y";
+		}
 		
-		//initialize stock name
-		String name = symbols[0];
+		int numOfStocks = symbols.length;
+		Map<Date, Double> historyData;
 		
-		
-		//System.out.println(name);
-		
-		//initialize stock data
-		Stock temp = stocks.get(name);
-		
-		//initialize stock history price data
-		List<HistoricalQuote> price =  temp.getHistory();
-		
-		//get the size of the data
-		int sizeOfdata = price.size();
-	    
-		//allocate space to the double matrix
-		stockPrice = new double[sizeOfdata][symbols.length];
-		
-		stockDate = new Calendar[sizeOfdata];
-		
-		
-		//assigning data to double matrix
-		for(int j = 0; j < symbols.length;j++) {
-			
-			name = symbols[j];
-			
-			temp = stocks.get(name);
-			
+		for (int i = 0; i < numOfStocks; i++) {
+			// Initialize Stock objects based on stock symbols
+			String symbol = symbols[i];
+			Stock stock = new Stock(symbol);
 			
 			//mark down the spy index in stock price 2d array
-			if(name == "SPY") {
-				
-				benchMark = j;
-			}
+			if(symbol == "SPY") {
+				benchMark = i;
+			} 
 			
-			price =  temp.getHistory();
+			// Get history price data
+			historyData = stock.getHistory(range, interval);
 			
-			for(int i = 0; i < sizeOfdata; i++) {
+			if (i == 0) { 
+				// Set shape of the stockPrice 2D array 
+				int rowNum = historyData.size();
+				stockPrice = new double[rowNum][numOfStocks];
+				stockDate = new Date[rowNum];
 				
-				double d = price.get(i).getAdjClose().doubleValue();
-				
-				stockPrice[i][j] = d;
-				
-				//System.out.println(d);
-				
-				if(j==0) {
-					stockDate[i] = price.get(i).getDate();
+				// Assign Date objects to stockDate array
+				int j = 0;
+				for (Date date: historyData.keySet()) {
+					stockDate[j] = date;
+					j++;
 				}
-				
-				
 			}
-						
 			
+			// Assign price data to stockPrice 2D array
+			int m = 0;
+			for (Date date:historyData.keySet()) {
+				stockPrice[m][i] = historyData.get(date);
+				m++;
+			}
 		}
-				
-		
+	
 	}
 	
-  
 	
-	/**
+	/** No modification
 	 * Returns the matrix of stock return. The return here is the log return.
 	 * @param  stockPrice  is the stock price matrix. Each column represent one stock.
 	 * @return stock return and covariance of stock return
 	 */
-	
 	public void getStockreturn(int contain_spy){
 		
 		int rowLen = stockPrice.length;
@@ -205,7 +191,7 @@ public class Analysis {
 	
 	
 	
-	/**
+	/** No modification
 	 * Returns an ArrayList of SimpleMatrix that the first element is
 	 * the mean of stock returns, the second of the element is the covariance
 	 * of the  stock returns. 
@@ -260,7 +246,7 @@ public class Analysis {
     }
 	
      
-	/**
+	/** No modification
 	 * Returns the array of weights on each stock we should invest along the history.
 	 * @param  Window size for estimating the variance or momentum
 	 * balance Period is how long need to be re balanced
@@ -297,10 +283,7 @@ public class Analysis {
 	
 	
 	
-	
-	
-	
-	/**
+	/** No modification
 	 * Returns the array of weights on each stock we should invest. The maximizing profit algorithm is
 	 * still under discussing and constructing
 	 * @param  X_sub is the return data matrix the period, and re is the total return of each stock
@@ -308,7 +291,6 @@ public class Analysis {
 	 * @return array of weights on each stock we need to invest
 	 * @throws Exception 
 	 */
-	
 	
 	public double[][] getWeights(SimpleMatrix X_sub, SimpleMatrix periodReturn, int strategy) throws Exception {
 		
@@ -364,7 +346,7 @@ public class Analysis {
 	}
     
 	
-	/**
+	/** No modification
 	 * Returns the accumlated return of stocks we invested along history.(back testing of strategy) 
 	 * @param  double[][] hisreturn, the historical return in that balancing period
 	 * @return accumlated return along history
@@ -401,11 +383,11 @@ public class Analysis {
 	 * @return accumlated return along history
 	 * @throws Exception 
 	 */
-	public Calendar[] getCalendar(int[][] window){
+	public Date[] getDate(int[][] window){
 		
 		int size = window[0].length - 1;
 		
-		Calendar[] investDate  = new Calendar[size];
+		Date[] investDate  = new Date[size]; //Calendar[] investDate  = new Calendar[size];
 		
 		for(int i = 0; i < size; i++) {
 			
@@ -418,19 +400,21 @@ public class Analysis {
 	}
 	
 	
-	/**
+	/** No modification
 	 * Returns the return of stocks we invested along history in that period.(back testing of strategy) 
 	 * @param  
 	 * @return array of weights on each stock we need to invest
 	 * @throws Exception 
 	 */
-	public double[][] backTesting(int windowSize, int balancePeriod, int strategy) throws Exception{
+	public ArrayList<double[][]> backTesting(int windowSize, int balancePeriod, int strategy) throws Exception{
 		
 		/*int strategy = 0; equal weighted strategy*/
 		
 		int rollen = returnData.length;
 		
 		int collen = returnData[0].length;
+		
+		ArrayList<double[][]> returnResult = new ArrayList<double[][]>();
 		
 		
 		//transform into SimplexMatrix for matrix operation
@@ -498,12 +482,15 @@ public class Analysis {
 		
 		finalReturn = getFinalReturn(hisReturn);
 		
+		returnResult.add(hisReturn);
+		
+		returnResult.add(finalReturn);
 		
 		/*System.out.println(finalReturn[0][window[0].length - 2]);
 		
 		System.out.println(finalReturn[1][window[0].length - 2]);*/
 		
-		return finalReturn;
+		return returnResult;
 		
 		
 		
@@ -595,7 +582,7 @@ public class Analysis {
 	}
 	
 	
-	/**
+	/** No modification
 	 * Returns the array of advice on each stock we should invest. The advice algorithm is
 	 * still under discussing and constructing
 	 * @param  ArrayList of SimpleMatrix, which the first element is mean and second element is covariance
@@ -690,21 +677,9 @@ public class Analysis {
 		
 		String[] symbols1 = symbols.toArray(new String[symbols.size()]);
 		
-		API testAPI = new API();
-		
-		testAPI.setup();
-		
-		testAPI.multiYearData(symbols1,interval);
-		
-		
-		// Can also be done with explicit from, to and Interval parameters
-		Map<String, Stock> stocks = testAPI.getStocks();
-		
-		
-    	
     	Analysis testAnalysis =  new Analysis();
     	
-    	testAnalysis.getStockprice(symbols1,stocks);
+    	testAnalysis.getStockprice(symbols1, "High");
     	
     	testAnalysis.getStockreturn(contain_spy);
     	

@@ -4,20 +4,30 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-import yahoofinance.Stock;
+//import yahoofinance.Stock;
 
 public class AnalysisRunner {
 	
 	    
-	    //return variables
-	    private Calendar[] investmentDate; //these are dates in history that we made balance
+	    //return variables about how to invest
+	    private Date[] investmentDate; //these are dates in history that we made balance
 	    private double[][] weights; //these are the weights for each stocks. Dimension is 1 x number of stocks.
 	    private double[][] histReturn; //these are the returns following our strategy and also 
 	    //contains the SPY return for bechmark. Dimension is 2 x number of dates in history that we made balance
-	    private String[] risks; //these are the risks rating for each stocks. Length is the number of stocks.
+	    
+	    
+	    
+	    //return variables about risks
+	    private String[] indiviualStock_risks; //these are the risks rating for each stocks. Length is the number of stocks.
+	    private String riskRating;
+		private double sharpeRatio;
+		private double drawDown;
+	    
+	   
 	    
 	    
 	    //variables needs to be setup to run
@@ -72,56 +82,47 @@ public class AnalysisRunner {
 	        }
 			String[] symbols1 = symbols.toArray(new String[symbols.size()]);
 			
-			
-			
-			//this API is external, will adopt another built in house API
-			API testAPI = new API();
-			testAPI.setup();
-			testAPI.multiYearData(symbols1,Score);
-			Map<String, Stock> stocks = testAPI.getStocks();
-			
-			
-	 	
-			//this is where portfolio gets built
-			Analysis testAnalysis =  new Analysis();
-	 
-	 	    testAnalysis.getStockprice(symbols1,stocks);
-	 	
-	 	    testAnalysis.getStockreturn(contain_spy);
-	 	
-	 	    histReturn = testAnalysis.backTesting(windowSize, balancePeriod, Strategy);
-
+		
+			//this is where portfolio gets built and you can get weights and historical return of investment portfolios
+			ArrayList<double[][]> returnResult = new ArrayList<double[][]>();			
+			Analysis testAnalysis =  new Analysis();	 
+	 	    testAnalysis.getStockprice(symbols1, Score);	 	
+	 	    testAnalysis.getStockreturn(contain_spy);	 	
+	 	    returnResult = testAnalysis.backTesting(windowSize, balancePeriod, Strategy);	 	   
+	 	    histReturn = returnResult.get(1);
 	 	    for(int i = 0; i < histReturn.length; i++) {
 	 	    	
 	 	    	 System.out.println("histReturn" + i + ": "+ Arrays.toString(histReturn[i]));
-	 	    }
-	 	    
-	 	   
-	 	    
-	 	    weights = testAnalysis.getAdvice(windowSize, balancePeriod, Strategy);
-	 	   
-	 	    	
+	 	    } 
+	 	    weights = testAnalysis.getAdvice(windowSize, balancePeriod, Strategy);	
 	 	    System.out.println("weights: "+ Arrays.toString(weights[0]));
 	 	    	
 	 	    
-	 	    //System.out.println("weights: " + Arrays.toString(weights));
-	 	    
-	 	    int[][] window = testAnalysis.getWindow(windowSize, balancePeriod);
-	 	    
-	 	    
-	 	    investmentDate = testAnalysis.getCalendar(window);
-	 	    
+	 	    //this is where to retrieve investment date
+	 	    int[][] window = testAnalysis.getWindow(windowSize, balancePeriod);	 	    
+	 	    investmentDate = testAnalysis.getDate(window);	 	    
 	 	    System.out.println("investment times: "+ investmentDate.length);
 	    	
 	    	
-	 	    risks = testAnalysis.getRisks(contain_spy);
+	 	    //this is where to retrieve risk information
+	 	    indiviualStock_risks = testAnalysis.getRisks(contain_spy);
+	 	    System.out.println("indiviual stock risks: " + Arrays.toString(indiviualStock_risks));
+	 	    RiskValuator riskRun = new RiskValuator(returnResult.get(0));
+	 	    riskRun.RiskValuatorCompute();
+	 	    drawDown = riskRun.getDrawDown();
+	 	    System.out.println("drawDown: "+ drawDown);
+	 	    sharpeRatio = riskRun.getSharpeRatio();
+	 	    System.out.println("sharpeRatio: "+ sharpeRatio);
+	 	    riskRating = riskRun.getRiskRating();
+	 	    System.out.println("riskRatin: "+ riskRating);
 	 	    
-	 	    System.out.println("risks: " + Arrays.toString(risks));
+	 	     
+	 	    
 	    	
 	    }
 	    
 	    
-	    public Calendar[] getInvestmentDate() {
+	    public Date[] getInvestmentDate() {
 			return investmentDate;
 		}
 
@@ -140,10 +141,23 @@ public class AnalysisRunner {
 
 
 		public String[] getRisks() {
-			return risks;
+			return indiviualStock_risks;
 		}
 		
 	
+		public String getRiskRating() {
+			return riskRating;
+		}
+
+
+		public double getSharpeRatio() {
+			return sharpeRatio;
+		}
+
+
+		public double getDrawDown() {
+			return drawDown;
+		}
 
 		
 		//String[] symbols_user = new String[] {"INTC", "BABA", "TSLA"};
@@ -155,11 +169,17 @@ public class AnalysisRunner {
 	 		//Here is a test case of user picking three stocks and assessment test being high
 	 		List<String> symbols = new ArrayList<String>();
 	 		
-	 		symbols.add("INTC");
+	 		//symbols.add("INTC");
 	 		
-	 		symbols.add("BABA");
+	 		//symbols.add("BABA");
 	 		
-	 		symbols.add("TSLA");
+	 		//symbols.add("TSLA");
+	 		
+	 		symbols.add("SPY");
+	 		
+	 		symbols.add("QQQ");
+	 		
+	 		symbols.add("GLD");
 	 		
 	 		String Score = "High";
 	 		
@@ -184,6 +204,8 @@ public class AnalysisRunner {
 	 		
 	    }
 
+
+		
 
 
 		
