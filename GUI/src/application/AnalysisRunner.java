@@ -93,7 +93,7 @@ public class AnalysisRunner {
 
 	 	    for(int i = 0; i < histReturn.length; i++) {
 	 	    	
-	 	    	 System.out.println("histReturn" + i + ": "+ Arrays.toString(histReturn[i]));
+	 	    	// System.out.println("histReturn" + i + ": "+ Arrays.toString(histReturn[i]));
 	 	    }
 	 	    
 	 	   
@@ -101,7 +101,7 @@ public class AnalysisRunner {
 	 	    weights = testAnalysis.getAdvice(windowSize, balancePeriod, Strategy);
 	 	   
 	 	    	
-	 	    System.out.println("weights: "+ Arrays.toString(weights[0]));
+	 	    //System.out.println("weights: "+ Arrays.toString(weights[0]));
 	 	    	
 	 	    
 	 	    //System.out.println("weights: " + Arrays.toString(weights));
@@ -111,12 +111,12 @@ public class AnalysisRunner {
 	 	    
 	 	    investmentDate = testAnalysis.getCalendar(window);
 	 	    
-	 	    System.out.println("investment times: "+ investmentDate.length);
+	 	   // System.out.println("investment times: "+ investmentDate.length);
 	    	
 	    	
 	 	    risks = testAnalysis.getRisks(contain_spy);
 	 	    
-	 	    System.out.println("risks: " + Arrays.toString(risks));
+	 	    //System.out.println("risks: " + Arrays.toString(risks));
 	    	
 	    }
 	    
@@ -148,7 +148,7 @@ public class AnalysisRunner {
 		
 		//String[] symbols_user = new String[] {"INTC", "BABA", "TSLA"};
 	    
-	    public static void main(String[] args) throws Exception {
+	   public static void main(String[] args) throws Exception {
 	    	
 	 		
 	 		
