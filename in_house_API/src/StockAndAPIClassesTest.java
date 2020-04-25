@@ -51,7 +51,7 @@ public class StockAndAPIClassesTest {
 		String[] stockSymbols = {"SPY", "IWM", "QQQ", "SCHH", "XLF", "RWM", "UVXY", "GLD", "REK"};
 		// Yahoo Finance API allows many time ranges and intervals, these are what will be used in our program
 		String[] intervals = {"1d", "1wk", "1mo"};
-		String[] ranges = {"1y", "2y", "10y"};
+		String[] ranges = {"1y", "2y", "5y"};
 		
 		for (String symbol: stockSymbols) {
 			try {
