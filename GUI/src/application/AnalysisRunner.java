@@ -1,6 +1,7 @@
 package application;
 
 import java.io.IOException;
+import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -114,7 +115,7 @@ public class AnalysisRunner {
 	 	    sharpeRatio = riskRun.getSharpeRatio();
 	 	    System.out.println("sharpeRatio: "+ sharpeRatio);
 	 	    riskRating = riskRun.getRiskRating();
-	 	    System.out.println("riskRatin: "+ riskRating);
+	 	    System.out.println("riskRating: "+ riskRating);
 	 	    
 	 	     
 	 	    
@@ -122,8 +123,16 @@ public class AnalysisRunner {
 	    }
 	    
 	    
-	    public Date[] getInvestmentDate() {
-			return investmentDate;
+	    public String[] getInvestmentDate() {
+	    	
+	    	DateFormat df= DateFormat.getDateInstance(); //initialize a DateFormat() object
+	    	
+	    	String[] final_investmentDate = new String[investmentDate.length];
+	    	for (int i = 0; i<investmentDate.length; i++) {
+	    		final_investmentDate[i] = df.format(investmentDate[i]);
+	    	}
+	
+			return final_investmentDate;
 		}
 
 
@@ -181,12 +190,15 @@ public class AnalysisRunner {
 	 		
 	 		symbols.add("GLD");
 	 		
-	 		String Score = "High";
+	 		String Score = "Mid";
 	 		
 	 		//Portfoilo gets built
 	 		
 	 		AnalysisRunner runtest = new AnalysisRunner(Score);
 	 		runtest.AnalysisCompute(symbols);
+	 		runtest.getRiskRating();
+	 		System.out.println(Arrays.toString(runtest.getInvestmentDate()));
+
 	 		
 	 		//it will print: histReturn0: [-0.09850874504512777.....]
 	 		//it will print: histReturn1: [0.001997609315795401.....]
