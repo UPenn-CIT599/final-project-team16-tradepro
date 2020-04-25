@@ -3,6 +3,7 @@ package application;
 import java.awt.Desktop.Action;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.ResourceBundle;
 
 import javafx.collections.ObservableList;
@@ -13,7 +14,10 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
+import javafx.scene.chart.XYChart.Series;
 import javafx.scene.control.Button;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
@@ -26,6 +30,9 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class PortfolioController implements Initializable{
+	
+	@FXML
+    private LineChart<String, Integer> thisChart;
 	
     @FXML
     private AnchorPane thisPortfolio;
@@ -126,7 +133,7 @@ public class PortfolioController implements Initializable{
 		menuItemClose.setId("menuItemClose");
 		menuItemDelete.setId("menuItemDelete");
 		menuItemAbout.setId("menuItemAbout");
-		
+
 	}
 	
 	/**
@@ -179,6 +186,29 @@ public class PortfolioController implements Initializable{
 		
 		
 	}
+	
+	
+	@FXML
+	public void GraphPopulator() {
+		ScrapeSandPFullHistoricData SSPFHD = new ScrapeSandPFullHistoricData("/Users/stevebaca/Desktop/MCIT Final/GUI/SandPData - Sheet1.csv");
+		
+		HashMap<String, Integer>thisGuy = SSPFHD.getSandPData();
+		
+		
+		
+		Series<String, Integer> series1 = new XYChart.Series<>();
+		for (String s : thisGuy.keySet()) {
+			String tempVal = s;
+			int otherVal = thisGuy.get(s);
+			
+			XYChart.Data<String, Integer> d = new XYChart.Data<>(tempVal, otherVal);
+			series1.getData().add(d);
+		}
+		thisChart.getData().add(series1);
+
+	}
+	
+	
 
 	
 }

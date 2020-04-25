@@ -60,7 +60,7 @@
             </ScrollPane>
          </left>
          <center>
-            <LineChart prefHeight="433.0" prefWidth="788.0" BorderPane.alignment="CENTER">
+            <LineChart fx:id="thisChart" prefHeight="433.0" prefWidth="788.0" BorderPane.alignment="CENTER">
               <xAxis>
                 <CategoryAxis fx:id="timeCategoryAxis" label="Time" prefHeight="32.0" prefWidth="748.0" tickLabelFill="#0a0202" />
               </xAxis>
@@ -75,7 +75,7 @@
                   <TextField fx:id="metricOne" layoutX="263.0" layoutY="68.0" prefHeight="51.0" prefWidth="160.0" />
                   <TextField fx:id="metricTwo" layoutX="552.0" layoutY="66.0" prefHeight="51.0" prefWidth="160.0" />
                   <TextField fx:id="metricThree" layoutX="837.0" layoutY="66.0" prefHeight="51.0" prefWidth="160.0" />
-                  <Button fx:id="weeklyButton" layoutX="56.0" layoutY="31.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="85.0" text="Weekly" />
+                  <Button fx:id="weeklyButton" layoutX="56.0" layoutY="31.0" mnemonicParsing="false" onAction="#GraphPopulator" prefHeight="27.0" prefWidth="85.0" text="Weekly" />
                   <Button fx:id="monthlyButton" layoutX="56.0" layoutY="66.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="85.0" text="Monthly" />
                   <Button fx:id="yearlyButton" layoutX="56.0" layoutY="104.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="87.0" text="Yearly" />
                   <Text fill="#eee2e2" layoutX="64.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Time" textAlignment="CENTER" wrappingWidth="71.22900390625" />

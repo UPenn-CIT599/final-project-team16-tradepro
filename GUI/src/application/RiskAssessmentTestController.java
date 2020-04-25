@@ -42,6 +42,9 @@ public class RiskAssessmentTestController implements Initializable{
 
 	@FXML
 	private TextField recommendedInvestmentTimeline;
+	
+	@FXML
+    private TextField ratTextBox;
 
 	@FXML
 	private TextField q1TextBox;
@@ -417,6 +420,7 @@ public class RiskAssessmentTestController implements Initializable{
 		q10TextBox.setEditable(false);
 		q11TextBox.setEditable(false);
 		q12TextBox.setEditable(false);
+		ratTextBox.setEditable(false);
 
 
 	}
@@ -881,10 +885,10 @@ public class RiskAssessmentTestController implements Initializable{
 			recommendedInvestmentTimeline.setText("Monthly");
 		}else
 		if(value ==3||value==4) {
-			recommendedInvestmentTimeline.setText("Weekly");
+			recommendedInvestmentTimeline.setText("Bi-Weekly");
 		}else
 		if(value ==5) {
-			recommendedInvestmentTimeline.setText("Daily");
+			recommendedInvestmentTimeline.setText("Weekly");
 		}
 		
 		
