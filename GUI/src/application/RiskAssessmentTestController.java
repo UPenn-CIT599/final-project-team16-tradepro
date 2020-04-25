@@ -881,10 +881,10 @@ public class RiskAssessmentTestController implements Initializable{
 			recommendedInvestmentTimeline.setText("Monthly");
 		}else
 		if(value ==3||value==4) {
-			recommendedInvestmentTimeline.setText("Weekly");
+			recommendedInvestmentTimeline.setText("Bi-Weekly");
 		}else
 		if(value ==5) {
-			recommendedInvestmentTimeline.setText("Daily");
+			recommendedInvestmentTimeline.setText("Weekly");
 		}
 		
 		
