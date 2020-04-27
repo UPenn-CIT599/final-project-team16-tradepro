@@ -1,3 +1,7 @@
+/**
+ * This is all just adding CSS styles and colors to the GUI
+ */
+
 .root{
 	-fx-background-color: DarkGrey;
 }
@@ -106,5 +110,18 @@
 }
 #menuItemAbout .label{
 		-fx-text-fill: Black;
+}
+
+#portfolioTracker{
+	-fx-background-color: #222;
+	-fx-border-color: GhostWhite;
+	-fx-cursor: hand;
+	-fx-text-fill: GhostWhite;
+}
+#futureWeights{
+	-fx-background-color: #222;
+	-fx-border-color: GhostWhite;
+	-fx-cursor: hand;
+	-fx-text-fill: GhostWhite;
 }
 

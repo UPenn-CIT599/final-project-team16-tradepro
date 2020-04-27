@@ -1,24 +1,24 @@
 package application;
 
-import java.awt.Desktop.Action;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
+
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map.Entry;
 import java.util.ResourceBundle;
 import java.util.Set;
 
-import cern.colt.Arrays;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.chart.CategoryAxis;
@@ -33,10 +33,13 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+/**
+ * @author stevebaca
+ *
+ */
 public class PortfolioController implements Initializable{
 
 	@FXML
@@ -114,17 +117,26 @@ public class PortfolioController implements Initializable{
 	@FXML
 	private VBox portfolioTracker;
 
+	@FXML
+	private VBox futureWeights;
+
+	@FXML
+	private Button anothaOneWeights;
+
+
 
 	List<String> symbols = new ArrayList<String>();
 
-	HashMap<String, Double>returnsRealized = new HashMap<String, Double>();
-	HashMap<String, Double>returnsRealized2 = new HashMap<String, Double>();
+	HashMap<String, Double>returnsRealized = new LinkedHashMap<String, Double>();
+	HashMap<String, Double>returnsRealized2 = new LinkedHashMap<String, Double>();
 
 
 	@FXML
 	private LineChart<String, Double> Chart;
 
-
+	/**
+	 * Initializes the scene
+	 */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 
@@ -135,9 +147,9 @@ public class PortfolioController implements Initializable{
 	}
 
 	/**
-	 * 
+	 * Giving every button a CSS ID
 	 */
-	 public void CSSButtonIdentifier() {
+	public void CSSButtonIdentifier() {
 
 		menuBar.setId("menuBar");
 		fileButton.setId("fileButton");
@@ -151,95 +163,142 @@ public class PortfolioController implements Initializable{
 		menuItemDelete.setId("menuItemDelete");
 		menuItemAbout.setId("menuItemAbout");
 
-	 }
+		metricOne.setEditable(false);
+		metricTwo.setEditable(false);
+		metricThree.setEditable(false);
 
-	 /**
-	  * 
-	  */
-	 public void ThisRiskAssesmentMenuItemListener() {
 
-		 thisRiskAssessmentMenuItem.setOnAction((ActionEvent e)->{
+	}
 
-			 try {
+	/**
+	 * Adding a button listener for the risk assessment menu item listener
+	 */
+	public void ThisRiskAssesmentMenuItemListener() {
 
-				 Parent part = FXMLLoader.load(getClass().getResource("/application/RiskAssessmentTest.fxml"));
-				 Stage stage = new Stage();
-				 Scene scene = new Scene(part);
-				 scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
-				 stage.setScene(scene);			
-				 stage.show();
-			 }
-			 catch (Exception e1) {
-				 // TODO: handle exception
-			 }
+		thisRiskAssessmentMenuItem.setOnAction((ActionEvent e)->{
 
-		 });
+			try {
 
-	 }
+				Parent part = FXMLLoader.load(getClass().getResource("/application/RiskAssessmentTest.fxml"));
+				Stage stage = new Stage();
+				Scene scene = new Scene(part);
+				scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+				stage.setScene(scene);			
+				stage.show();
+			}
+			catch (Exception e1) {
+				// TODO: handle exception
+			}
 
-	 public void ButtonPopulator() {
+		});
 
-		 ArrayList<String>thisGuy = new ArrayList<String>();
+	}
+	
+	/**
+	 * Populating the buttons in the main vbox
+	 */
+	public void ButtonPopulator() {
 
-		 Set<String>ok = new HashSet<String>();
+		ArrayList<String>thisGuy = new ArrayList<String>();
 
-		 thisGuy.add("SPY");
-		 thisGuy.add("RUT");
-		 thisGuy.add("QQQ");
-		 thisGuy.add("SCHH");
-		 thisGuy.add("XLF");
-		 thisGuy.add("RWM");
-		 thisGuy.add("UVXY");
-		 thisGuy.add("GLD");
-		 thisGuy.add("REK");
+		Set<String>ok = new HashSet<String>();
 
-		 for (String string : thisGuy) {
+		thisGuy.add("SPY");
+		thisGuy.add("QQQ");
+		thisGuy.add("SCHH");
+		thisGuy.add("XLF");
+		thisGuy.add("RWM");
+		thisGuy.add("UVXY");
+		thisGuy.add("GLD");
+		thisGuy.add("REK");
 
-			 Button tempButton = new Button(string);
-			 tempButton.setPrefWidth(190);
-			 tempButton.setId("tempButton");
-			 thisVBox.getChildren().add(tempButton);
+		for (String string : thisGuy) {
 
-			 tempButton.setOnAction((ActionEvent e)->{
-				 symbols.add(tempButton.getText());
-				 ok.add(tempButton.getText());
+			Button tempButton = new Button(string);
+			tempButton.setPrefWidth(190);
+			tempButton.setId("tempButton");
+			thisVBox.getChildren().add(tempButton);
 
-				 
-
-					 Button temp = new Button(string);
-					 temp.setPrefWidth(136);
-					 temp.setPrefHeight(2);
-					 portfolioTracker.getChildren().add(temp);
-
-				
-			 });
+			tempButton.setOnAction((ActionEvent e)->{
+				symbols.add(tempButton.getText());
+				ok.add(tempButton.getText());
 
 
 
-		 }
+				Button temp = new Button(string);
+				temp.setId("portfolioTracker");
+				temp.setPrefWidth(136);
+				temp.setPrefHeight(2);
+				portfolioTracker.getChildren().add(temp);
 
 
-	 }
-
-
-	 public void SPY() {
+			});
 
 
 
-		 String Score = "High";
+		}
 
-		 //Portfoilo gets built
-		 
-		 RiskAssessmentTestController RATC = new RiskAssessmentTestController();
+
+	}
+
+	/**
+	 * This class provides functionality to the GUI
+	 * takes value from Risk Assessment Test
+	 * Makes it so that you can build your portfolio, visualize data, and get the weights for you portfolio
+	 */
+	public void SPY() {
+
+
+		FXMLLoader load = new FXMLLoader(getClass().getResource("/application/RiskAssessmentTest.fxml"));
+		try {
+			Parent Root = load.load();
+		} catch (IOException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
+		RiskAssessmentTestController RATC = load.getController();
+		String thisScore = RATC.AddEmUp();
+
+
+
+		//Portfoilo gets built
+
 
 		// System.out.println(RATC.AddEmUp());
-		 
-		 AnalysisRunner runtest = new AnalysisRunner(Score);
+
+		AnalysisRunner runtest = new AnalysisRunner(thisScore);
+
+		try {
+			runtest.AnalysisCompute(symbols);
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+
+		anothaOneWeights.setOnAction((ActionEvent e)->{
+			double[][] Weights = runtest.getWeights();
+
+			ArrayList<Double>disJoint = new ArrayList<Double>();
+
+			for(int i =0; i< Weights.length; i++) {
+				for(int j =0; j < Weights[i].length; j++) {
+					disJoint.add(Weights[i][j]);
+				}
+			}
+
+			for (Double double1 : disJoint) {
+				Button tempGuy = new Button(double1.toString());
+				tempGuy.setPrefWidth(85);
+				tempGuy.setPrefHeight(2);
+				tempGuy.setId("futureWeights");
+				futureWeights.getChildren().add(tempGuy);
+			}
 
 
+		});
 
-		 weeklyButton.setOnAction((ActionEvent e)->{
-			 /*Chart.getData().clear();
+		weeklyButton.setOnAction((ActionEvent e)->{
+			/*Chart.getData().clear();
 			XYChart.Series<String, Double>test = new XYChart.Series<String, Double>();
 			test.getData().add(new XYChart.Data<String, Double>("Feb 14", 10.5));
 			test.getData().add(new XYChart.Data<String, Double>("Feb 19", 18.3));
@@ -249,98 +308,130 @@ public class PortfolioController implements Initializable{
 
 
 
-			 try {
-				 runtest.AnalysisCompute(symbols);
-			 } catch (Exception e1) {
-				 // TODO Auto-generated catch block
-				 e1.printStackTrace();
-			 }
 
-			 double[][]histReturn	= runtest.getHistReturn();
-			 double[][] Weights = runtest.getWeights();
-			 String[] investmentDate = runtest.getInvestmentDate();
-			 String[]risks = runtest.getRisks();
 
-			 metricOne.setText("" + runtest.getDrawDown());
-			 metricTwo.setText("" + runtest.getSharpeRatio());
-			 metricThree.setText("" + runtest.getRiskRating());
 
-			 ArrayList<Double>holder = new ArrayList<Double>();
 
-			 for(int i = 0; i < histReturn.length; i++) {
-				 for(int j =0; j<histReturn[i].length;j++) {
-					 holder.add(histReturn[i][j]);
-				 }
-			 }
-
-			 ArrayList<String>timeHolder = new ArrayList<String>();
-			 ////////////////////////////////////
-			 ////////////////////////////////////
-			 ////////////////////////////////////
-			 for (String string : investmentDate) {
-				 timeHolder.add(string);
-			 }
-			 ////////////////////////////////////
-			 ////////////////////////////////////
-			 ////////////////////////////////////
-			 ////////////////////////////////////
-
-			 ArrayList<Double>firstHalfHolder = new ArrayList<Double>();
-
-			 for(int i =0; i < holder.size()/2; i++) {
-				 firstHalfHolder.add(holder.get(i));
-			 }
-
-			 ArrayList<Double>secondHalfHolder = new ArrayList<Double>();
-
-			 for(int i =holder.size()/2; i < holder.size(); i++) {
-				 secondHalfHolder.add(holder.get(i));
-			 }
+			double[][]histReturn	= runtest.getHistReturn();
+			String[] investmentDate = runtest.getInvestmentDate();
+			String[]risks = runtest.getRisks();
 
 
 
 
 
-			 for(int i =0; i< timeHolder.size();i++) {
-				 returnsRealized.put(timeHolder.get(i), firstHalfHolder.get(i));
-			 }
+			//futureWeights
 
-			 for(int i = 0; i< timeHolder.size();i++) {
-				 returnsRealized2.put(timeHolder.get(i), secondHalfHolder.get(i));			}
+			metricOne.setText("" + runtest.getDrawDown());
+			metricTwo.setText("" + runtest.getSharpeRatio());
+			metricThree.setText("" + runtest.getRiskRating());
+			metricThree.setAlignment(Pos.CENTER);
+
+			ArrayList<Double>holder = new ArrayList<Double>();
+
+			for(int i = 0; i < histReturn.length; i++) {
+				for(int j =0; j<histReturn[i].length;j++) {
+					holder.add(histReturn[i][j]);
+				}
+			}
+
+			ArrayList<String>timeHolder = new ArrayList<String>();
+			////////////////////////////////////
+			////////////////////////////////////
+			////////////////////////////////////
+			for (String string : investmentDate) {
+				timeHolder.add(string);
+			}
+			////////////////////////////////////
+			////////////////////////////////////
+			////////////////////////////////////
+			////////////////////////////////////
+
+			ArrayList<Double>firstHalfHolder = new ArrayList<Double>();
+
+			for(int i =0; i < holder.size()/2; i++) {
+				firstHalfHolder.add(holder.get(i));
+			}
+
+			ArrayList<Double>secondHalfHolder = new ArrayList<Double>();
+
+			for(int i =holder.size()/2; i < holder.size(); i++) {
+				secondHalfHolder.add(holder.get(i));
+			}
 
 
 
-			 XYChart.Series<String, Double>anotherOne = new XYChart.Series<String, Double>();
-			 XYChart.Series<String, Double>anotherOne2 = new XYChart.Series<String, Double>();
-
-			 ObservableList<XYChart.Data<String, Double>> data = FXCollections.observableArrayList();
-			 ObservableList<XYChart.Data<String, Double>> data2 = FXCollections.observableArrayList();
 
 
-			 for (Entry<String, Double> e1 : returnsRealized.entrySet()) {
-				 String k1 = String.valueOf(e1.getKey());
-				 Double v = e1.getValue();
+			for(int i =0; i< timeHolder.size();i++) {
+				returnsRealized.put(timeHolder.get(i), firstHalfHolder.get(i));
 
-				 data.add(new Data<String, Double>(k1, v));
-			 }
-
-			 for (Entry<String, Double> e1 : returnsRealized2.entrySet()) {
-				 String k1 = String.valueOf(e1.getKey());
-				 Double v = e1.getValue();
-
-				 data2.add(new Data<String, Double>(k1, v));
-			 }
+			}
 
 
-			 Chart.getData().clear();
-			 anotherOne.setName("Portfolio Returns");
-			 anotherOne2.setName("S&P 500 Returns");
-			 anotherOne2.getData().addAll(data2);
-			 anotherOne.getData().addAll(data);
-			 Chart.getData().addAll(anotherOne,anotherOne2);
 
-		 });
-	 }
+			for(int i = 0; i< timeHolder.size();i++) {
+				returnsRealized2.put(timeHolder.get(i), secondHalfHolder.get(i));}
+
+
+
+
+			XYChart.Series<String, Double>anotherOne = new XYChart.Series<String, Double>();
+			XYChart.Series<String, Double>anotherOne2 = new XYChart.Series<String, Double>();
+
+			ObservableList<XYChart.Data<String, Double>> data = FXCollections.observableArrayList();
+			ObservableList<XYChart.Data<String, Double>> data2 = FXCollections.observableArrayList();
+
+
+			for (Entry<String, Double> e1 : returnsRealized.entrySet()) {
+				String k1 = String.valueOf(e1.getKey());
+				Double v = e1.getValue();
+
+				data.add(new Data<String, Double>(k1, v));
+			}
+
+			for (Entry<String, Double> e1 : returnsRealized2.entrySet()) {
+				String k1 = String.valueOf(e1.getKey());
+				Double v = e1.getValue();
+
+				data2.add(new Data<String, Double>(k1, v));
+			}
+
+
+
+			Chart.getData().clear();
+			anotherOne.setName("Portfolio Returns");
+			anotherOne2.setName("S&P 500 Returns");
+			anotherOne2.getData().addAll(data2);
+			anotherOne.getData().addAll(data);
+			Chart.getData().addAll(anotherOne,anotherOne2);
+
+		});
+	}
+	
+	/**
+	 * Get symbols
+	 * @return List
+	 */
+	public List<String> getSymbols() {
+		return symbols;
+	}
+
+	/**
+	 * Get Returns realized
+	 * @return hashmap
+	 */
+	public HashMap<String, Double> getReturnsRealized() {
+		return returnsRealized;
+	}
+
+	/**
+	 * get returns realized 2
+	 * @return hashmap
+	 */
+	public HashMap<String, Double> getReturnsRealized2() {
+		return returnsRealized2;
+	}
 
 
 

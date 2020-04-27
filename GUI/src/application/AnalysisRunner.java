@@ -93,29 +93,29 @@ public class AnalysisRunner {
 	 	    histReturn = returnResult.get(1);
 	 	    for(int i = 0; i < histReturn.length; i++) {
 	 	    	
-	 	    	 System.out.println("histReturn" + i + ": "+ Arrays.toString(histReturn[i]));
+	 	    	// System.out.println("histReturn" + i + ": "+ Arrays.toString(histReturn[i]));
 	 	    } 
 	 	    weights = testAnalysis.getAdvice(windowSize, balancePeriod, Strategy);	
-	 	    System.out.println("weights: "+ Arrays.toString(weights[0]));
+	 	   // System.out.println("weights: "+ Arrays.toString(weights[0]));
 	 	    	
 	 	    
 	 	    //this is where to retrieve investment date
 	 	    int[][] window = testAnalysis.getWindow(windowSize, balancePeriod);	 	    
 	 	    investmentDate = testAnalysis.getDate(window);	 	    
-	 	    System.out.println("investment times: "+ investmentDate.length);
+	 	    //System.out.println("investment times: "+ investmentDate.length);
 	    	
 	    	
 	 	    //this is where to retrieve risk information
 	 	    indiviualStock_risks = testAnalysis.getRisks(contain_spy);
-	 	    System.out.println("indiviual stock risks: " + Arrays.toString(indiviualStock_risks));
+	 	    //System.out.println("indiviual stock risks: " + Arrays.toString(indiviualStock_risks));
 	 	    RiskValuator riskRun = new RiskValuator(returnResult.get(0));
 	 	    riskRun.RiskValuatorCompute();
 	 	    drawDown = riskRun.getDrawDown();
-	 	    System.out.println("drawDown: "+ drawDown);
+	 	    //System.out.println("drawDown: "+ drawDown);
 	 	    sharpeRatio = riskRun.getSharpeRatio();
-	 	    System.out.println("sharpeRatio: "+ sharpeRatio);
+	 	    //System.out.println("sharpeRatio: "+ sharpeRatio);
 	 	    riskRating = riskRun.getRiskRating();
-	 	    System.out.println("riskRating: "+ riskRating);
+	 	    //System.out.println("riskRating: "+ riskRating);
 	 	    
 	 	     
 	 	    

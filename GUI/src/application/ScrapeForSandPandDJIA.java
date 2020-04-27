@@ -15,7 +15,11 @@ public class ScrapeForSandPandDJIA {
 	private String anotherPrice;
 	
 	
-	
+	/**
+	 * gets SandP500 live data
+	 * @return
+	 * @throws IOException
+	 */
 	public String SandPReader() throws IOException{
 		
 		URL url = new URL("https://www.reuters.com/quote/.SPX");
@@ -45,6 +49,11 @@ public class ScrapeForSandPandDJIA {
 
 	}
 	
+	/**
+	 * Gets DJIA live data
+	 * @return
+	 * @throws IOException
+	 */
 	public String DJIAReader() throws IOException{
 		
 		URL url = new URL("https://www.reuters.com/quote/.DJI");

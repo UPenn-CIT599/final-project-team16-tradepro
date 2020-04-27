@@ -39,7 +39,9 @@ public class Scene1Controller implements Initializable{
 	@FXML
 	private TextField djiaShower;
 
-
+	/**
+	 * Initalizes this scene
+	 */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 
@@ -55,7 +57,9 @@ public class Scene1Controller implements Initializable{
 	}
 
 
-
+	/**
+	 * Adding functionality to the buttons on the front page, launches RAT
+	 */
 	public void Button1Listener() {
 
 
@@ -79,7 +83,10 @@ public class Scene1Controller implements Initializable{
 
 
 	}
-
+	
+	/**
+	 * Launches portfolio builder
+	 */
 	public void Button2Listener() {
 
 		yourPortfolio.setOnAction((ActionEvent e)->{
@@ -102,7 +109,11 @@ public class Scene1Controller implements Initializable{
 
 
 	}
-
+	
+	/**
+	 * sets the SandP500 and DJIA values 
+	 * @throws IOException
+	 */
 	public void setDJIAandSandPText() throws IOException {
 		ScrapeForSandPandDJIA sp = new ScrapeForSandPandDJIA();
 
