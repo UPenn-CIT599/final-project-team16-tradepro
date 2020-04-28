@@ -29,7 +29,7 @@
   		<groupId>junit</groupId>
   		<artifactId>junit</artifactId>
   		<version>4.13</version>
-  		<scope>test</scope>
+  		<scope>provided</scope>
   	</dependency>
   	<dependency>
   		<groupId>org.ejml</groupId>
@@ -59,6 +59,12 @@
   		<groupId>com.github.vincentk</groupId>
   		<artifactId>joptimizer</artifactId>
   		<version>3.4.2</version>
+  		<scope>provided</scope>
+  	</dependency>
+  	<dependency>
+  		<groupId>org.junit.jupiter</groupId>
+  		<artifactId>junit-jupiter</artifactId>
+  		<version>5.5.2</version>
   		<scope>provided</scope>
   	</dependency>
   </dependencies>

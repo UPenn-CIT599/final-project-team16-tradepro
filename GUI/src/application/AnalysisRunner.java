@@ -1,13 +1,13 @@
 package application;
 
-import java.io.IOException;
+//import java.io.IOException;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Calendar;
+//import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
+//import java.util.Map;
 
 //import yahoofinance.Stock;
 
@@ -91,10 +91,10 @@ public class AnalysisRunner {
 	 	    testAnalysis.getStockreturn(contain_spy);	 	
 	 	    returnResult = testAnalysis.backTesting(windowSize, balancePeriod, Strategy);	 	   
 	 	    histReturn = returnResult.get(1);
-	 	    for(int i = 0; i < histReturn.length; i++) {
+	 	    //for(int i = 0; i < histReturn.length; i++) {
 	 	    	
 	 	    	// System.out.println("histReturn" + i + ": "+ Arrays.toString(histReturn[i]));
-	 	    } 
+	 	    //} 
 	 	    weights = testAnalysis.getAdvice(windowSize, balancePeriod, Strategy);	
 	 	   // System.out.println("weights: "+ Arrays.toString(weights[0]));
 	 	    	

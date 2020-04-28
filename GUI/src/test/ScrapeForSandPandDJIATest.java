@@ -1,10 +1,12 @@
-package application;
+package test;
 
 import static org.junit.Assert.*;
 
 import java.io.IOException;
 
 import org.junit.Test;
+
+import application.ScrapeForSandPandDJIA;
 
 public class ScrapeForSandPandDJIATest {
 

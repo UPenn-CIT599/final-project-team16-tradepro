@@ -1,9 +1,11 @@
-package application;
+package test;
 
 import static org.junit.Assert.*;
 
 
 import org.junit.Test;
+
+import application.PortfolioController;
 
 
 public class PortfolioControllerTest {

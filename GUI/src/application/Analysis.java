@@ -2,8 +2,8 @@ package application;
 
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Calendar;
+//import java.util.Arrays;
+//import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -18,7 +18,7 @@ import org.ejml.simple.SimpleMatrix;
 import java.io.IOException;
 /*import java.io.IOException;*/
 import java.lang.Math;
-import java.math.BigDecimal;
+//import java.math.BigDecimal;
 
 
 
@@ -410,7 +410,7 @@ public class Analysis {
 		
 		/*int strategy = 0; equal weighted strategy*/
 		
-		int rollen = returnData.length;
+		//int rollen = returnData.length;
 		
 		int collen = returnData[0].length;
 		
@@ -653,7 +653,7 @@ public class Analysis {
 		        // what we print out is the transpose of the matrix
 		    }System.out.print("\n");
 		} */
-        String interval = "DAY";
+        //String interval = "DAY";
 		
 		//String[] symbols_user = new String[] {"INTC", "BABA", "TSLA"};
 		
