@@ -1,8 +1,0 @@
-For now,
-Zeneng's code is in the master branch folder "Analysis_API"
-Steve's code is in the master branch folder "GUI"
-Xi's code is in the branch XP.
-
-Zeneng is using an exogenous API wrapper to quickly get the stock price data so that he could has the input for his analysis class.
-Xi is working on her own API class to get the stock price data. 
-The two API classes will be put into one class finally.
