@@ -1,21 +1,24 @@
-package application;
-
 import java.io.IOException;
 import java.util.Date;
 import java.util.Map;
 
 /**
- * This class is to hold and update the info of individual stock
+ * This class invokes the functions of the API class to get the stock information, 
+ * and convert to needed data type. 
+ * To get real time price, it's suggested to call update() method first to make sure 
+ * the info is updated, and then call getPrice(). 
+ * For memory efficiency, the history price data won't be requested and stored until 
+ * getHistory() is called.
  * @author Xi Peng
  *
  */
 public class Stock {
-	private String symbol;
+	private String symbol; // "symbol": "MSFT"
 	private String currency;  //"currency":"USD"
 	private String name; //"shortName":"Microsoft Corporation"
 	private double change;  //"regularMarketChange":11.029999
 	private double changePercent;  //"regularMarketChangePercent":7.170252,
-	private Date marketTime; //"regularMarketTime":1586202655
+	private Date marketTime; //"regularMarketTime"
 	private double price; //"regularMarketPrice":164.86
 	private double dayHigh;  //"regularMarketDayHigh":164.99
 	private double dayLow;  //"regularMarketDayLow":157.59
@@ -31,7 +34,7 @@ public class Stock {
 	/**
 	 * Constructor. Requires the symbol of the stock as input, 
 	 * then call methods of API class to get the public available info of the stock,
-	 * and assign them to each instance variable.
+	 * and assign them to corresponding instance variable.
 	 * @param symbol
 	 * @throws IOException 
 	 * @throws IllegalArgumentException 
@@ -69,10 +72,11 @@ public class Stock {
 	}
 	
 	/**
-	 * Get the history data of a stock with API class's methods, and assign it to the history variable, 
+	 * Get the history price data of a stock by calling API class's methods, 
 	 * with user decided time range and interval as arguments
-	 * @param interval - String. User decided time interval
-	 * @return TreeMap - <Date, Double>. The history data with time as keys and price as values ordered by time
+	 * @param range - String. Time range for history data. Valid range: "1d","5d","1mo","1y","2y","5y"
+	 * @param interval - String. Time interval. Valid interval: "1m","1h","1d","1wk","1mo"
+	 * @return TreeMap<Date, Double> - The history data with time as keys and price as values ordered by time
 	 * @throws IOException 
 	 * @throws IllegalArgumentException 
 	 */
@@ -146,5 +150,21 @@ public class Stock {
 	public double getFiftyTwoWeekHigh() {
 		return fiftyTwoWeekHigh;
 	}
+	
+	/*
+	 * The main() methods is to show how to initialize new object and how to use the main functions
+	 * 
+	 * public static void main(String[] args) {
+		try {
+			Stock stock = new Stock("MSFT");
+			System.out.println(stock.getName());
+			stock.update();
+			System.out.println(stock.getPrice());
+			System.out.println(stock.getHistory("1y", "1mo"));
+		} catch (Exception e) {
+			System.out.println("Oops! Sth wrong happened. Please check the stock symbol and try again");
+		}
+	}
+	*/
 	
 }

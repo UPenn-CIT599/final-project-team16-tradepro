@@ -1,0 +1,23 @@
+Serenity Investments
+
+Team members: (Alphabetic order) Steve Baca, Xi Peng, Zeneng Fan
+
+
+Description
+
+The main purpose of the app is to provide a customized investing portfolio based on the user's risk tolerance level and investing interests.
+The user first answer questions in the risk tolerance assessment test, and the app will calculate the risk tolerance level.
+Next the user choose stocks he is interested in. The app passes the choices along with the risk tolerance level to the analysis class.
+The analysis class invokes the API class to get stock price data from internet, analyze the data, and pass the results back to GUI.
+Finally the GUI shows the suggested investing weights for each stock, and a graph indicating returns of the suggested portfolio.
+
+
+Job breakdown
+
+Steve Baca - Developed the GUI, Risk Assessment Test, and visualization of analysis results
+Xi Peng - Initialized the workflow of the app. Developed the API and Stock classes.
+Zeneng Fan - Improved the workflow. Developed the data analysis part.
+
+
+GitHub link
+https://github.com/UPenn-CIT599/final-project-team16-tradepro
